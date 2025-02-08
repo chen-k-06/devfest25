@@ -6,22 +6,25 @@ html {
 body {
     background-color: #b9d9eb;
 }
+
 /*header*/
-.headerBar{
+.headerBar {
     display: flex;
     flex-direction: row;
     background-color: #FFFFFF;
     text-decoration: none;
     justify-content: space-between;
     font-family: monospace;
-  
+
 }
 
 /*header text*/
-.title{
+.title {
     display: flex;
     text-align: center;
     justify-content: center;
     font-family: 'Verdana', Sans-serif;
     color: #112A46;
+    margin-left: auto;
+    margin-right: auto;
 }
