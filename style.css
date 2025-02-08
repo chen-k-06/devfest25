@@ -12,34 +12,26 @@ body {
     display: flex;
     flex-direction: row;
     background-color: #FFFFFF;
-    text-decoration: none;
-    justify-content: space-between;
-    font-family: monospace;
+    width: 100vw;
+    position: fixed;
 }
 
 /*header text*/
 .title {
     display: flex;
-    text-align: center;
-    justify-content: center;
+    text-align: left;
+    justify-content: space-between;
     font-family: 'Proxima Nova';
     color: #112A46;
-    margin-left: auto;
-    margin-right: auto;
     font-size: xx-large;
+    margin-left: 30px;
 }
 
-.container {
+i {
     display: flex;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.greeting {
-    display: flex;
-    text-align: center;
+    text-align: bottom;
     justify-content: center;
     font-family: 'Proxima Nova';
-    max-width: 300 px;
+    font-size: small;
+    color: #112A46;
 }
