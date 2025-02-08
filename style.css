@@ -27,6 +27,7 @@ body {
     color: #112A46;
     margin-left: auto;
     margin-right: auto;
+    font-size: xx-large;
 }
 
 .container {
@@ -41,4 +42,5 @@ body {
     text-align: center;
     justify-content: center;
     font-family: 'Proxima Nova';
+    max-width: 300 px;
 }
