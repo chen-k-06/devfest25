@@ -1,3 +1,7 @@
+:root {
+    --header-height: 80px; /* Define a variable */
+}
+
 html {
     height: 100%;
     width: 100%;
@@ -10,15 +14,19 @@ body {
 /*header*/
 .headerBar {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    top: 0;
+    left: 0;
+    align-items: flex-start;
     background-color: #FFFFFF;
     width: 100vw;
     position: fixed;
+    padding: 10px 30px;
+    z-index: 1000;
 }
 
 /*header text*/
 .title {
-    display: flex;
     text-align: left;
     justify-content: space-between;
     font-family: 'Proxima Nova';
@@ -27,11 +35,28 @@ body {
     margin-left: 30px;
 }
 
-i {
-    display: flex;
-    text-align: bottom;
-    justify-content: center;
+/* Subtitle */
+.subtitle {
     font-family: 'Proxima Nova';
     font-size: small;
     color: #112A46;
+    font-style: italic;
+    align-self: flex-start; /* Ensure it aligns left */
+}
+
+
+.searchBars input {
+    width: 80%;
+    padding: 10px;
+    margin: 10px auto;
+    display: block;
+    font-size: 16px;
+    font-family: 'Proxima Nova';
+}
+
+
+#map {
+    height: 100vh;
+    width: 100%;
+    margin-top: 10px; /* Creates space between search bars and map */
 }

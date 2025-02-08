@@ -8,10 +8,10 @@ function adjustContentPosition() {
         let headerHeight = header.offsetHeight;
 
         // Push search bars down
-        if (searchBars) searchBars.style.marginTop = `${headerHeight + 10}px`; // 10px margin below header
+        if (searchBars) searchBars.style.marginTop = `${headerHeight + 50}px`; // 50px margin below header
 
         // Push map further down
-        if (map) map.style.marginTop = `${headerHeight + 60}px`; // Adjust spacing as needed
+        if (map) map.style.marginTop = `${headerHeight + 10}px`; // Adjust spacing as needed
     }
 }
 

@@ -19,26 +19,27 @@
   <nav>
     <div class="headerBar">
       <h1 class="title">Accessible Columbia</h1>
-      <i>Mapping accessible routes and wheelchair-friendly buildings across campus for inclusive navigation.</i>
+      <div class = "subtitle">Mapping accessible routes and wheelchair-friendly buildings across campus for inclusive navigation.</div>
     </div>
   </nav>
   <!-- End of NavBar -->
 
   <!-- Start and End Search Bar -->
-  <input id="searchBarStart" type="text" placeholder="Enter Start Location..."
-    style="width: 80%; padding: 10px; margin: 10px auto; display: block; font-size: 16px;">
-  <input id="searchBarEnd" type="text" placeholder="Enter End Location..."
-    style="width: 80%; padding: 10px; margin: 10px auto; display: block; font-size: 16px;">
+   <div class = "searchBars">
+        <h3>Where do you want to go?</h3>
+        <input id="searchBarStart" type="text" placeholder="Enter Start Location...">
+        <input id="searchBarEnd" type="text" placeholder="Enter End Location...">
+   </div>
 
-  <div id="map"></div>
+   <!-- do need this apparently-->
+   <div id="map"></div>
 
   <!-- Load Google Maps API -->
   <script src="script.js"></script>
-  <!-- <script src="map.js"></script> -->
+  <!--<script src="map.js"></script>-->
   <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXYcZIS7fXp0_jMgZpzTECXy32QVVnOzk&callback=initMap&libraries=places"
     async defer></script>
 
 </body>
-
 </html>
