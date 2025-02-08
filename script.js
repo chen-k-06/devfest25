@@ -43,11 +43,11 @@ function initMap() {
         { "name": "Chef Mike's Sub Shop", "lat": 0, "lng": 0, "accessible": true },
         { "name": "Johnny's", "lat": 0, "lng": 0, "accessible": true },
         { "name": "Chef Don's Pizza Pi", "lat": 0, "lng": 0, "accessible": true },
-        { "name": "Blue Java- Uris", "lat": 0, "lng": 0, "accessible": true },
-        { "name": "Blue Java- Butler", "lat": 0, "lng": 0, "accessible": true },
-        { "name": "Blue Java- Mudd", "lat": 0, "lng": 0, "accessible": true }
-        { "name": "Joe's Coffee- Northwest Corner", "lat": 0, "lng": 0, "accessible": true },
-        { "name": "Joe's Coffee- Furnald", "lat": 0, "lng": 0, "accessible": true }
+        { "name": "Blue Java Café - Uris", "lat": 0, "lng": 0, "accessible": true },
+        { "name": "Blue Java Café - Butler", "lat": 0, "lng": 0, "accessible": true },
+        { "name": "Blue Java Café - Mudd", "lat": 0, "lng": 0, "accessible": true },
+        { "name": "Joe's Coffee - Northwest Corner", "lat": 0, "lng": 0, "accessible": true },
+        { "name": "Joe's Coffee - Furnald", "lat": 0, "lng": 0, "accessible": true }
     ];
 
     // Initialize map
