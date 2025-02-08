@@ -15,32 +15,28 @@
 </head>
 
 <body>
-  <script src="script.js"></script>
-  <!-- Nav Bar!  -->
+  <!-- Nav Bar! -->
   <nav>
     <div class="headerBar">
       <h1 class="title">Accessible Columbia</h1>
     </div>
   </nav>
-  <!--  End of NavBar  -->
+  <!-- End of NavBar -->
 
   <div class="container">
     <p class="greeting"> Welcome to Accessible Columbia! <br> Columbia University's Morningside Campus is one of the
-      least navigatable and accessible campuses
-      we have ever been on. To fix this, Accessible Columbia aims to compile all information in one place so you can get
-      to your classes and get around campus
-      safely and accessibly!
+      least navigable and accessible campuses we have ever been on. To fix this, Accessible Columbia aims to compile all
+      information in one place so you can get to your classes and get around campus safely and accessibly!
     </p>
   </div>
-</body>
 
-<body>
   <input id="searchBar" type="text" placeholder="Search for a location..."
     style="width: 80%; padding: 10px; margin: 10px auto; display: block; font-size: 16px;">
 
   <div id="map"></div>
 
   <!-- Load Google Maps API -->
+  <script src="script.js"></script>
   <script src="map.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXYcZIS7fXp0_jMgZpzTECXy32QVVnOzk&callback=initMap"
     async defer></script>
