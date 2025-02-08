@@ -1,4 +1,27 @@
 html {
     height: 100%;
     width: 100%;
-  }
+}
+
+body {
+    background-color: #b9d9eb;
+}
+/*header*/
+.headerBar{
+    display: flex;
+    flex-direction: row;
+    background-color: #FFFFFF;
+    text-decoration: none;
+    justify-content: space-between;
+    font-family: monospace;
+  
+}
+
+/*header text*/
+.pageTitle {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    font-family: 'Verdana', Sans-serif;
+    color: #112A46;
+}
