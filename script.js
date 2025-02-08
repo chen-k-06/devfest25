@@ -5,7 +5,7 @@ function adjustSearchBarPosition() {
 
     if (header && searchBars) {
         let headerHeight = header.offsetHeight;
-        searchBars.style.marginTop = ${ headerHeight } px;
+        searchBars.style.marginTop = `${headerHeight} px`;
     }
 }
 
