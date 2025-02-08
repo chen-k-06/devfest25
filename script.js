@@ -4,7 +4,7 @@ function initMap() {
     const campusCenter = { lat: 40.809008176956404, lng: -73.96384528956837 };
 
     const buildings = [
-        { "name": "Northwest Corner Science Building", "lat": 0, "lng": 0, "accessible": true },
+        { "name": "Northwest Corner Science Building", "lat": 40.810126869634149, "lng": 73.96194424631715, "accessible": true },
         { "name": "Pupin Hall", "lat": 0, "lng": 0, "accessible": true },
         { "name": "Schapiro Center for Engineering and Physical Science Research (CEPSR)", "lat": 0, "lng": 0, "accessible": true },
         { "name": "Mudd Building", "lat": 0, "lng": 0, "accessible": true },
