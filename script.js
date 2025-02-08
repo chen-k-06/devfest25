@@ -2,8 +2,16 @@ let map, directionsService, directionsRenderer;
 
 // EDIT BUILDINGS
 const buildings = [
-    { name: "Library", lat: 40.7128, lng: -74.0060, accessible: true },
-    { name: "Science Hall", lat: 40.7130, lng: -74.0075, accessible: false }
+    { name: "Low Memorial Library", lat: 40.807722, lng: -73.962222, accessible: true },
+    { name: "Butler Library", lat: 40.806503, lng: -73.961698, accessible: true },
+    { name: "Alfred Lerner Hall", lat: 40.807535, lng: -73.964766, accessible: true },
+    { name: "Pupin Hall", lat: 40.810376, lng: -73.960446, accessible: false },
+    { name: "Schermerhorn Hall", lat: 40.809045, lng: -73.960683, accessible: true },
+    { name: "Avery Hall", lat: 40.807759, lng: -73.961353, accessible: true },
+    { name: "Hamilton Hall", lat: 40.807895, lng: -73.962555, accessible: true },
+    { name: "John Jay Hall", lat: 40.806062, lng: -73.963764, accessible: true },
+    { name: "Dodge Hall", lat: 40.807417, lng: -73.963089, accessible: false },
+    { name: "Uris Hall", lat: 40.808691, lng: -73.961296, accessible: true },
   ];
 
 function initMap() {
