@@ -1,5 +1,6 @@
 let map, directionsService, directionsRenderer;
 
+// EDIT BUILDINGS
 const buildings = [
     { name: "Library", lat: 40.7128, lng: -74.0060, accessible: true },
     { name: "Science Hall", lat: 40.7130, lng: -74.0075, accessible: false }
@@ -37,6 +38,11 @@ function initMap() {
 function calculateRoute() {
     const start = document.getElementById("start").value;
     const end = document.getElementById("end").value;
+
+    const directionsService = new google.maps.DirectionsService();
+    const directionsRenderer = new google.maps.DirectionsRenderer();
+
+    directionsRenderer.setMap(map);
 
     if (!start || !end) {
         alert("Please enter both start and destination locations.");
