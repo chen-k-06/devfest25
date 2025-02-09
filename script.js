@@ -197,16 +197,21 @@ function isAccessibleRoute(startLocation, endLocation) {
     });
 }
 
-// Function to calculate the distance between two coordinates (in lat/lng)
-function getDistance(coord1, coord2) {
-    const R = 6371; // Radius of the Earth in km
-    const dLat = (coord2.lat - coord1.lat) * (Math.PI / 180);
-    const dLng = (coord2.lng - coord1.lng) * (Math.PI / 180);
-    const a =
-        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-        Math.cos(coord1.lat * (Math.PI / 180)) * Math.cos(coord2.lat * (Math.PI / 180)) *
-        Math.sin(dLng / 2) * Math.sin(dLng / 2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    const distance = R * c; // Distance in km
-    return distance;
+// Helper function to calculate the perpendicular distance from a point to a line
+function pointToLineDistance(point, lineStart, lineEnd) {
+    const lineLength = getDistance(lineStart, lineEnd);
+    if (lineLength === 0) return getDistance(point, lineStart); // Avoid division by zero
+
+    // Project the point onto the line
+    const t = ((point.lat() - lineStart.lat()) * (lineEnd.lat() - lineStart.lat()) + (point.lng() - lineStart.lng()) * (lineEnd.lng() - lineStart.lng())) / (lineLength * lineLength);
+
+    // Check if the perpendicular projection falls on the line segment
+    if (t < 0) return getDistance(point, lineStart); // Closest to the start point
+    if (t > 1) return getDistance(point, lineEnd); // Closest to the end point
+
+    // Find the projected point on the line
+    const projection = new google.maps.LatLng(lineStart.lat() + t * (lineEnd.lat() - lineStart.lat()), lineStart.lng() + t * (lineEnd.lng() - lineStart.lng()));
+
+    // Return the distance from the point to the projected point
+    return getDistance(point, projection);
 }
