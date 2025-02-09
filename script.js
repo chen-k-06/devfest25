@@ -3,18 +3,43 @@ let map, directionsService, directionsRenderer, startAutocomplete, endAutocomple
 let showBuildings = false;
 let showDining = false;
 let showEntrances = false;
+let markers = [];
 
-//update checkbox state
+function clearMarkers() {
+    markers.forEach(marker => {
+        marker.setMap(null); // Removes marker from the map
+    });
+    markers = []; // Clears the markers array
+}
+
 function updateCheckboxState() {
+    // Update the checkbox states
     showBuildings = document.getElementById("buildings").checked;
     showDining = document.getElementById("dining").checked;
     showEntrances = document.getElementById("entrances").checked;
+
+    // Clear existing markers
+    clearMarkers();
+
+    // Add new markers based on the updated states
+    if (showBuildings) {
+        buildings.forEach(building => createMarker(building, map, 'building'));
+    }
+    if (showDining) {
+        dining_spots.forEach(spot => createMarker(spot, map, 'dining'));
+    }
+    if (showEntrances) {
+        campus_entrances.forEach(entrance => createMarker(entrance, map, 'campus_entrance'));
+    }
 }
 
 //add event listener
 document.getElementById("buildings").addEventListener("change", updateCheckboxState);
 document.getElementById("dining").addEventListener("change", updateCheckboxState);
 document.getElementById("entrances").addEventListener("change", updateCheckboxState);
+document.addEventListener("DOMContentLoaded", function() {
+    updateCheckboxState(); // Initialize the map based on the initial checkbox state
+});
 
 function adjustContentPosition() {
     let header = document.getElementById('header');
@@ -109,10 +134,6 @@ function initMap() {
         center: campusCenter,
     });
 
-    if (showBuildings) buildings.forEach(building => createMarker(building, map, 'building'));
-    if (showDining) dining_spots.forEach(dining_spots => createMarker(dining_spots, map, 'dining'));
-    if (showEntrances) campus_entrances.forEach(campus_entrances => createMarker(campus_entrances, map, 'campus_entrance'));
-
     accessibleRoutes.forEach(route => {
         const accessiblePolyline = new google.maps.Polyline({
             path: [route.start, route.end],
@@ -198,17 +219,27 @@ function createMarker(item, map, type) {
         title: item.name,
         icon: iconURL
     });
+    // Store marker in global array
+    markers.push(marker);
 
-
-    // Create the info window
-    const infowindow = new google.maps.InfoWindow({
-        content: content
+    // Create and attach an info window to the marker
+    const infoWindow = new google.maps.InfoWindow({
+        content: `${item.name}` // Customize content as needed
     });
 
-    // Add click listener to open info window
-    marker.addListener("click", () => {
-        infowindow.open(map, marker);
+    marker.addListener("click", function() {
+        infoWindow.open(map, marker);
     });
+
+    // // Create the info window
+    // const infowindow = new google.maps.InfoWindow({
+    //     content: content
+    // });
+
+    // // Add click listener to open info window
+    // marker.addListener("click", () => {
+    //     infowindow.open(map, marker);
+    // });
 }
 
 // Helper function to calculate the distance between two LatLng points
