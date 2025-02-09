@@ -27,7 +27,7 @@ nav {
     background-color: #FFFFFF;
     width: 100vw;
     position: fixed;
-    padding: 10px 30px;
+    padding: 10px 15px;
     z-index: 1000;
     font-family: 'Raleway';
     text-decoration: none;
@@ -123,5 +123,6 @@ p {
 /*For reports page*/
 .hartleyReport {
     padding: 10px 30px;
+    margin-top: 80px;
     text-align: left;
 }

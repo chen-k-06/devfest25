@@ -25,10 +25,13 @@ function adjustContentPosition() {
         let headerHeight = header.offsetHeight;
 
         // Push search bars down
-        if (searchBars) searchBars.style.marginTop = `${headerHeight + 50}px`; // 50px margin below header
+        if (searchBars) {
+            searchBars.style.marginTop = `${headerHeight + 50}px`; // 50px margin below header
+            searchBars.style.marginBottom = `10px`;
+        }
 
         // Push map further down
-        if (map) map.style.marginTop = `${headerHeight}px`; // Adjust spacing as needed
+        if (map) map.style.marginTop = `10px`; // Adjust spacing as needed
     }
 }
 
