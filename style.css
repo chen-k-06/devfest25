@@ -41,13 +41,14 @@ nav {
 .nav-buttons {
     display: flex;
     gap: 1rem;
-    margin-top: 0.5rem; /* Adjust to align vertically with title */
+    margin-top: 0.5rem;
+    /* Adjust to align vertically with title */
     padding: 10px 30px;
     font-family: 'Open Sans';
 }
 
 .nav-btn {
-    
+
     background: #007bff;
     color: white;
     border: none;
@@ -64,8 +65,9 @@ h1 {
 
 p {
     margin: 0.5rem 0 0 0;
-    font-size: x-small;
+    font-size: medium;
 }
+
 /*
 .headerBar {
     display: flex;
@@ -129,5 +131,5 @@ p {
 
 .mission {
     margin-top: 100px;
-    
+
 }
