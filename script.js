@@ -40,7 +40,7 @@ function updateCheckboxState() {
 document.getElementById("buildings").addEventListener("change", updateCheckboxState);
 document.getElementById("dining").addEventListener("change", updateCheckboxState);
 document.getElementById("entrances").addEventListener("change", updateCheckboxState);
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     updateCheckboxState(); // Initialize the map based on the initial checkbox state
 });
 
@@ -79,7 +79,9 @@ function initMap() {
         { start: { lat: 40.8080864754902, lng: -73.96262080759266 }, end: { lat: 40.806474149531546, lng: -73.96376606874476 } }, // west carmen road
         { start: { lat: 40.806411, lng: -73.962544 }, end: { lat: 40.807051, lng: -73.962086 } }, // low and hartley/wallach/jj
         { start: { lat: 40.806411, lng: -73.962544 }, end: { lat: 40.806822086838444, lng: -73.96353248753381 } }, // butler 
-        { start: { lat: 40.807923, lng: -73.963661 }, end: { lat: 40.806899, lng: -73.961231 } }, // college walk
+        { start: { lat: 40.80802912389255, lng: -73.96361253615044 }, end: { lat: 40.80699857851361, lng: -73.96112739189492 } }, // college walk north
+        { start: { lat: 40.807923, lng: -73.963661 }, end: { lat: 40.806899, lng: -73.961231 } }, // college walk middle
+        { start: { lat: 40.80782500251402, lng: -73.96376114835542 }, end: { lat: 40.80678301597929, lng: -73.96128560877787 } }, // college walk south
         { start: { lat: 40.80691601039507, lng: -73.96216854853691 }, end: { lat: 40.80667282489905, lng: -73.9615470240875 } }, // hamilton
         { start: { lat: 40.806524, lng: -73.962445 }, end: { lat: 40.80632009853347, lng: -73.96194153349448 } }, // to jj pavilion
         { start: { lat: 40.80651602676668, lng: -73.96180063839628 }, end: { lat: 40.80599570718233, lng: -73.96215944338078 } }, // hartley to jj
@@ -94,18 +96,34 @@ function initMap() {
         { start: { lat: 40.80800166569469, lng: -73.96266880510873 }, end: { lat: 40.80760834975843, lng: -73.96170451426596 } }, // low library
         { start: { lat: 40.80760834975843, lng: -73.96170451426596 }, end: { lat: 40.807525, lng: -73.961748 } }, // buell to kent
         { start: { lat: 40.807525, lng: -73.961748 }, end: { lat: 40.807348, lng: -73.961319 } }, // to kent 
-        // { start: { lat: , lng: }, end: { lat: , lng:  } }, // low to mudd
-        // { start: { lat: , lng: }, end: { lat: , lng:  } }, // low to uris, west
+        { start: { lat: 40.807612160674196, lng: -73.96175327285951 }, end: { lat: 40.80938533086729, lng: -73.96043886836287 } }, // low to mudd
+        { start: { lat: 40.807955, lng: -73.96260 }, end: { lat: 40.808916, lng: -73.961914 } }, // low to uris, west
         { start: { lat: 40.8080864754902, lng: -73.96262080759266 }, end: { lat: 40.808293740021185, lng: -73.96309684510324 } }, // lewisohn
-        // { start: { lat: , lng: }, end: { lat: , lng:  } }, // lewisohn
-        // { start: { lat: , lng: }, end: { lat: , lng:  } }, // lewisohn
-        // { start: { lat: , lng: }, end: { lat: , lng:  } }, // lewisohn
-        // { start: { lat: , lng: }, end: { lat: , lng:  } }, // lewisohn
-        // { start: { lat: , lng: }, end: { lat: , lng:  } }, // lewisohn
-        // { start: { lat: , lng: }, end: { lat: , lng:  } }, // lewisohn
-        // { start: { lat: , lng: }, end: { lat: , lng:  } }, // lewisohn
-
-
+        { start: { lat: 40.80826087116889, lng: -73.96298946905709 }, end: { lat: 40.80849745349627, lng: -73.96284287563252 } }, // lewisohn to earl
+        { start: { lat: 40.808532680212615, lng: -73.96218285163738 }, end: { lat: 40.808743749994505, lng: -73.96266543341457 } }, // earl north
+        { start: { lat: 40.80829380401972, lng: -73.9623515047828 }, end: { lat: 40.80851877738903, lng: -73.96288418155581 } }, // earl south
+        { start: { lat: 40.80851877738903, lng: -73.96288418155581 }, end: { lat: 40.808621152658, lng: -73.96292926705057 } }, // earl top curve
+        { start: { lat: 40.808743749994505, lng: -73.96266543341457 }, end: { lat: 40.808737, lng: -73.962847 } }, // earl bottom curve
+        { start: { lat: 40.808737, lng: -73.962847 }, end: { lat: 40.808621152658, lng: -73.96292926705057 } }, // earl middle
+        { start: { lat: 40.80927230924994, lng: -73.96264039063416 }, end: { lat: 40.80900183862863, lng: -73.96195742888027 } }, // havenmeyer
+        { start: { lat: 40.80900183862863, lng: -73.96195742888027 }, end: { lat: 40.808916, lng: -73.961914 } }, // havenmeyer to uris
+        { start: { lat: 40.808172, lng: -73.961335 }, end: { lat: 40.808093933104075, lng: -73.96113755699031 } }, // st pauls north
+        { start: { lat: 40.808052, lng: -73.961416, }, end: { lat: 40.80797512627775, lng: -73.96123106764611 } }, // st pauls center
+        { start: { lat: 40.807949, lng: -73.961505 }, end: { lat: 40.807863, lng: -73.961300 } }, // st pauls south
+        { start: { lat: 40.80894344414807, lng: -73.96250011993014 }, end: { lat: 40.80833677651957, lng: -73.96109245057909 } }, // math to avery
+        { start: { lat: 40.80874236314054, lng: -73.96265833706852 }, end: { lat: 40.809151861888985, lng: -73.9623460782715 } }, // earl to havenmeyer
+        { start: { lat: 40.80900183862863, lng: -73.96195742888027 }, end: { lat: 40.809496, lng: -73.961584 } }, // havenmeyer to pupin courtyard
+        { start: { lat: 40.809496, lng: -73.961584 }, end: { lat: 40.80967161335328, lng: -73.96163270750901 } }, //  pupin courtyard to NW
+        { start: { lat: 40.80967161335328, lng: -73.96163270750901 }, end: { lat: 40.809806901000385, lng: -73.96192777517226 } }, //  previous to NWC
+        { start: { lat: 40.809806901000385, lng: -73.96192777517226 }, end: { lat: 40.810023790140846, lng: -73.96178591571878 } }, //  inner corner
+        { start: { lat: 40.810023790140846, lng: -73.96178591571878 }, end: { lat: 40.80979401647469, lng: -73.96119294320323 } }, //  pupin
+        { start: { lat: 40.80979401647469, lng: -73.96119294320323 }, end: { lat: 40.809601, lng: -73.961295 } }, //  pupin SE
+        { start: { lat: 40.80967161335328, lng: -73.96163270750901 }, end: { lat: 40.8099142719506, lng: -73.9614851736774 } }, // NWC pupin square
+        { start: { lat: 40.80860707505032, lng: -73.96101732899758 }, end: { lat: 40.80838336587529, lng: -73.96042787789824 } }, // schemerhorn to fay
+        { start: { lat: 40.80838336587529, lng: -73.96042787789824 }, end: { lat: 40.808131850137535, lng: -73.96059653104554 } }, // fayeweather
+        { start: { lat: 40.809601, lng: -73.961295 }, end: { lat: 40.809496, lng: -73.961584 } }, // pupin NE
+        { start: { lat: 40.809601, lng: -73.961295 }, end: { lat: 40.809301701637224, lng: -73.9604943715276 } }, // cEPSR
+        // { start: { lat: , lng: }, end: { lat: , lng:  } }, // 
 
     ];
 
