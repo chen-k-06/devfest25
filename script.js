@@ -68,10 +68,42 @@ function initMap() {
 
     // DO STUFF HERE!!!!!!!
     const accessibleRoutes = [
-        { start: { lat: 40.806932, lng: -73.963438 }, end: { lat: 40.807252, lng: -73.964216 } }, // Accessible route 1
-        { start: { lat: 40.807133, lng: -73.963929 }, end: { lat: 40.807358, lng: -73.963779 } }, // Accessible route 2
-        { start: { lat: 40.807445, lng: -73.963036 }, end: { lat: 40.807051, lng: -73.962086 } }, // Accessible route 3
-        { start: { lat: 40.807432316683844, lng: -73.96299710507577 }, end: { lat: 40.806657842222194, lng: -73.96376169347042 } }, // Accessible route 4
+        //lower campus
+        { start: { lat: 40.806932, lng: -73.963438 }, end: { lat: 40.807252, lng: -73.964216 } }, // lerner / furnald 
+        { start: { lat: 40.80731979030094, lng: -73.96313834687042 }, end: { lat: 40.80749084403737, lng: -73.96353478582299 } }, // journalism
+        { start: { lat: 40.807133, lng: -73.963929 }, end: { lat: 40.807358, lng: -73.963779 } }, // furnald
+        { start: { lat: 40.807445, lng: -73.963036 }, end: { lat: 40.807051, lng: -73.962086 } }, // south lawn and low
+        { start: { lat: 40.8080864754902, lng: -73.96262080759266 }, end: { lat: 40.806474149531546, lng: -73.96376606874476 } }, // west carmen road
+        { start: { lat: 40.806411, lng: -73.962544 }, end: { lat: 40.807051, lng: -73.962086 } }, // low and hartley/wallach/jj
+        { start: { lat: 40.806411, lng: -73.962544 }, end: { lat: 40.806822086838444, lng: -73.96353248753381 } }, // butler 
+        { start: { lat: 40.807923, lng: -73.963661 }, end: { lat: 40.806899, lng: -73.961231 } }, // college walk
+        { start: { lat: 40.80691601039507, lng: -73.96216854853691 }, end: { lat: 40.80667282489905, lng: -73.9615470240875 } }, // hamilton
+        { start: { lat: 40.806524, lng: -73.962445 }, end: { lat: 40.80632009853347, lng: -73.96194153349448 } }, // to jj pavilion
+        { start: { lat: 40.80651602676668, lng: -73.96180063839628 }, end: { lat: 40.80599570718233, lng: -73.96215944338078 } }, // hartley to jj
+        { start: { lat: 40.806397482486545, lng: -73.9621361284226 }, end: { lat: 40.806069205019305, lng: -73.962357352612 } }, // parallel jj
+        { start: { lat: 40.806069205019305, lng: -73.962357352612 }, end: { lat: 40.80599570718233, lng: -73.96215944338078 } }, // perpendicular jj
+        { start: { lat: 40.807273, lng: -73.962643 }, end: { lat: 40.806697506112684, lng: -73.96304981527214 } }, // left lawn road
+        { start: { lat: 40.807213, lng: -73.962502 }, end: { lat: 40.806652, lng: -73.962930 } }, // right lawn road
+        { start: { lat: 40.806652, lng: -73.962930 }, end: { lat: 40.806697506112684, lng: -73.96304981527214 } }, // perp lawn road
+
+        //upper campus
+        { start: { lat: 40.80800166569469, lng: -73.96266880510873 }, end: { lat: 40.8082052716025, lng: -73.96316969944723 } }, // dodge
+        { start: { lat: 40.80800166569469, lng: -73.96266880510873 }, end: { lat: 40.80760834975843, lng: -73.96170451426596 } }, // low library
+        { start: { lat: 40.80760834975843, lng: -73.96170451426596 }, end: { lat: 40.807525, lng: -73.961748 } }, // buell to kent
+        { start: { lat: 40.807525, lng: -73.961748 }, end: { lat: 40.807348, lng: -73.961319 } }, // to kent 
+        // { start: { lat: , lng: }, end: { lat: , lng:  } }, // low to mudd
+        // { start: { lat: , lng: }, end: { lat: , lng:  } }, // low to uris, west
+        { start: { lat: , lng: }, end: { lat: , lng:  } }, // lewisohn
+        // { start: { lat: , lng: }, end: { lat: , lng:  } }, // lewisohn
+        // { start: { lat: , lng: }, end: { lat: , lng:  } }, // lewisohn
+        // { start: { lat: , lng: }, end: { lat: , lng:  } }, // lewisohn
+        // { start: { lat: , lng: }, end: { lat: , lng:  } }, // lewisohn
+        // { start: { lat: , lng: }, end: { lat: , lng:  } }, // lewisohn
+        // { start: { lat: , lng: }, end: { lat: , lng:  } }, // lewisohn
+        // { start: { lat: , lng: }, end: { lat: , lng:  } }, // lewisohn
+
+
+
     ];
 
     const buildings = [
@@ -106,19 +138,19 @@ function initMap() {
         { "name": "John Jay Hall", "lat": 40.80585231334633, "lng": -73.96236717239124, "accessibleBuildingEntrance": true, "buildingElevator": true, "ramp": false, "accessibleBuildingAccessWithAuthorization": false, "restrictedAccessElevator": false, "wheelchairLift": false },
         { "name": "Butler Library", "lat": 40.806358371702046, "lng": -73.96319231812728, "accessibleBuildingEntrance": true, "buildingElevator": true, "ramp": true, "accessibleBuildingAccessWithAuthorization": false, "restrictedAccessElevator": false, "wheelchairLift": false }
     ];
- 
+
     const dining_spots = [
-       { "name": "Ferris", "lat": 40.806856929097954, "lng": -73.9640194216417, "accessibleBuildingEntrance": true, "buildingElevator": true, "ramp": true, "accessibleBuildingAccessWithAuthorization": false, "restrictedAccessElevator": true, "wheelchairLift": false },
+        { "name": "Ferris", "lat": 40.806856929097954, "lng": -73.9640194216417, "accessibleBuildingEntrance": true, "buildingElevator": true, "ramp": true, "accessibleBuildingAccessWithAuthorization": false, "restrictedAccessElevator": true, "wheelchairLift": false },
         { "name": "JJ's", "lat": 40.80585424592349, "lng": -73.96236550336536, "accessibleBuildingEntrance": false, "buildingElevator": false, "ramp": false, "accessibleBuildingAccessWithAuthorization": true, "restrictedAccessElevator": false, "wheelchairLift": false },
-         { "name": "John Jay", "lat": 40.80585231334633, "lng": -73.96236717239124, "accessibleBuildingEntrance": true, "buildingElevator": true, "ramp": false, "accessibleBuildingAccessWithAuthorization": false, "restrictedAccessElevator": false, "wheelchairLift": false },
-         { "name": "Chef  Mike’s Sub Shop", "lat": 40.80904937459882, "lng": -73.96122323066608, "accessibleBuildingEntrance": true, "buildingElevator": true, "ramp": true, "accessibleBuildingAccessWithAuthorization": false, "restrictedAccessElevator": false, "wheelchairLift": false },
+        { "name": "John Jay", "lat": 40.80585231334633, "lng": -73.96236717239124, "accessibleBuildingEntrance": true, "buildingElevator": true, "ramp": false, "accessibleBuildingAccessWithAuthorization": false, "restrictedAccessElevator": false, "wheelchairLift": false },
+        { "name": "Chef  Mike’s Sub Shop", "lat": 40.80904937459882, "lng": -73.96122323066608, "accessibleBuildingEntrance": true, "buildingElevator": true, "ramp": true, "accessibleBuildingAccessWithAuthorization": false, "restrictedAccessElevator": false, "wheelchairLift": false },
         { "name": "Johnny's", "lat": 40.80602438304332, "lng": -73.96275370239007, "accessibleBuildingEntrance": false, "buildingElevator": false, "ramp": true, "accessibleBuildingAccessWithAuthorization": false, "restrictedAccessElevator": false, "wheelchairLift": false },
         { "name": "Chef Don's Pizza Pi", "lat": 40.809423710181996, "lng": -73.95992575511308, "accessibleBuildingEntrance": true, "buildingElevator": true, "ramp": false, "accessibleBuildingAccessWithAuthorization": false, "restrictedAccessElevator": false, "wheelchairLift": false },
-        { "name": "Blue Java Café - Uris",  "lat": 40.80904937459882, "lng": -73.96122323066608, "accessibleBuildingEntrance": true, "buildingElevator": true, "ramp": true, "accessibleBuildingAccessWithAuthorization": false, "restrictedAccessElevator": false, "wheelchairLift": false },
+        { "name": "Blue Java Café - Uris", "lat": 40.80904937459882, "lng": -73.96122323066608, "accessibleBuildingEntrance": true, "buildingElevator": true, "ramp": true, "accessibleBuildingAccessWithAuthorization": false, "restrictedAccessElevator": false, "wheelchairLift": false },
         { "name": "Blue Java Café - Butler", "lat": 40.806358371702046, "lng": -73.96319231812728, "accessibleBuildingEntrance": true, "buildingElevator": true, "ramp": true, "accessibleBuildingAccessWithAuthorization": false, "restrictedAccessElevator": false, "wheelchairLift": false },
         { "name": "Blue Java Café - Mudd", "lat": 40.809423710181996, "lng": -73.95992575511308, "accessibleBuildingEntrance": true, "buildingElevator": true, "ramp": false, "accessibleBuildingAccessWithAuthorization": false, "restrictedAccessElevator": false, "wheelchairLift": false },
     ];
- 
+
     const campus_entrances = [{ "name": "116th & Broadway entrance", "lat": 40.80794393404023, "lng": -73.9637138727193, "accessibleCampusEntrance": true },
     { "name": "116th & Amsterdam entrance", "lat": 40.80687583997451, "lng": -73.96117616184806, "accessibleCampusEntrance": true },
     { "name": "Northwest Corner entrance", "lat": 40.81028600452615, "lng": -73.96189101481595, "accessibleCampusEntrance": true },
@@ -195,11 +227,6 @@ function createMarker(item, map, type) {
             <strong>${item.name}</strong><br>
             <ul>
                 <li><strong>Accessible Campus Entrance:</strong> ${item.accessibleCampusEntrance ? "Yes" : "No"}</li>
-                <li><strong>Building Elevator:</strong> ${item.buildingElevator ? "Yes" : "No"}</li>
-                <li><strong>Ramp Available:</strong> ${item.ramp ? "Yes" : "No"}</li>
-                <li><strong>Accessible Building Access (with Authorization):</strong> ${item.accessibleBuildingAccessWithAuthorization ? "Yes" : "No"}</li>
-                <li><strong>Restricted Access Elevator:</strong> ${item.restrictedAccessElevator ? "Yes" : "No"}</li>
-                <li><strong>Wheelchair Lift:</strong> ${item.wheelchairLift ? "Yes" : "No"}</li>
             </ul>
         `;
         iconURL = 'https://maps.google.com/mapfiles/kml/shapes/highway.png';
@@ -236,7 +263,7 @@ function createMarker(item, map, type) {
         content: content
     });
 
-    marker.addListener("click", function() {
+    marker.addListener("click", function () {
         infoWindow.open(map, marker);
     });
 
