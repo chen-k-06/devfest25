@@ -74,6 +74,15 @@ function initMap() {
         { "name": "Blue Java Café - Mudd", "lat": 40.80941902236416, "lng": -73.95992275794005, "accessible": true }
     ];
 
+    const campus_entrances = [
+        { "name": "116th & Broadway entrance", "lat": 40.80794393404023, "lng": -73.9637138727193, "accessible": true },
+        { "name": "116th & Amsterdam entrance", "lat": 40.80687583997451, "lng": -73.96117616184806, "accessible": true },
+        { "name": "Northwest Corner entrance", "lat": 40.81028600452615, "lng": -73.96189101481595, "accessible": true },
+        { "name": "Schapiro entrance", "lat": 40.80979726892658, "lng": -73.96074790408879, "accessible": true },
+        { "name": "Computer Science entrance", "lat": 40.80933603350681, "lng": -73.95972463697046, "accessible": true },
+        { "name": "115th & Broadway entrance", "lat": 40.80724773603954, "lng": -73.96419603111585, "accessible": true }
+    ];
+
 
     // Initialize map
     map = new google.maps.Map(document.getElementById("map"), {
