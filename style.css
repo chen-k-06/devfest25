@@ -9,7 +9,15 @@ html {
 
 body {
     background-color: #b9d9eb;
+    font-family: 'Trebuchet MS';
 }
+
+/* @font-face {
+    font-family: 'Proxima Nova';
+    src: url('fonts/proximanova_regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  } */
 
 /*header*/
 .headerBar {
@@ -29,7 +37,8 @@ body {
 .title {
     text-align: left;
     justify-content: space-between;
-    font-family: 'Proxima Nova';
+    /* font-family: 'Proxima Nova'; */
+    font-weight: bold;
     color: #112A46;
     font-size: xx-large;
     margin-left: 30px;
@@ -37,7 +46,7 @@ body {
 
 /* Subtitle */
 .subtitle {
-    font-family: 'Proxima Nova';
+    /* font-family: 'Proxima Nova'; */
     font-size: small;
     color: #112A46;
     font-style: italic;
@@ -51,7 +60,7 @@ body {
     margin: 10px auto;
     display: block;
     font-size: 16px;
-    font-family: 'Proxima Nova';
+    /* font-family: 'Proxima Nova'; */
 }
 
 
