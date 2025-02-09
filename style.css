@@ -9,15 +9,15 @@ html {
 
 body {
     background-color: #b9d9eb;
-    font-family: 'Trebuchet MS';
+    font-family: 'Proxima Nova';
 }
 
-/* @font-face {
+@font-face {
     font-family: 'Proxima Nova';
     src: url('fonts/proximanova_regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
-  } */
+  }
 
 /*header*/
 .headerBar {
@@ -53,13 +53,6 @@ body {
     align-self: flex-start; /* Ensure it aligns left */
 }
 
-.searchBars {
-    font-family: 'Proxima Nova';
-    font-size: 16px;
-    padding: 10px;
-    margin: 10px auto;
-    width: 80%
-}
 
 .searchBars input {
     width: 80%;
@@ -69,6 +62,7 @@ body {
     font-size: 16px;
     /* font-family: 'Proxima Nova'; */
 }
+
 
 #map {
     height: 100vh;
