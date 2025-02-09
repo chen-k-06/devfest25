@@ -1,6 +1,6 @@
 let map, directionsService, directionsRenderer, startAutocomplete, endAutocomplete;
 function adjustContentPosition() {
-    let header = document.querySelector(".headerBar");
+    let header = document.getElementById('header');
     let searchBars = document.querySelector(".searchBars");
     let map = document.querySelector("#map");
 
@@ -20,6 +20,14 @@ window.addEventListener("load", adjustContentPosition);
 window.addEventListener("resize", adjustContentPosition);
 function initMap() {
     const campusCenter = { lat: 40.809008176956404, lng: -73.96384528956837 };
+
+    // DO STUFF HERE!!!!!!!
+    const accessibleRoutes = [
+        { start: { lat: 40.807722, lng: -73.962222 }, end: { lat: 40.806503, lng: -73.961698 } }, // Accessible route 1
+        { start: { lat: 40.807535, lng: -73.964766 }, end: { lat: 40.809045, lng: -73.960683 } }, // Accessible route 2
+        { start: { lat: 40.808691, lng: -73.961296 }, end: { lat: 40.807895, lng: -73.962555 } }, // Accessible route 3
+        // Add more accessible routes here
+    ];
 
     const buildings = [
         { "name": "Northwest Corner Science Building", "lat": 40.810126869634149, "lng": -73.96194424631715, "accessible": true },
@@ -74,6 +82,17 @@ function initMap() {
     });
 
     buildings.forEach(building => createMarker(building, map));
+    accessibleRoutes.forEach(route => {
+        const accessiblePolyline = new google.maps.Polyline({
+            path: [route.start, route.end],
+            geodesic: true,
+            strokeColor: '#0059b3', // Green color for accessible routes
+            strokeOpacity: 1.0,
+            strokeWeight: 4,
+        });
+
+        accessiblePolyline.setMap(map);
+    });
 
     // Initialize Directions Service and Renderer
     directionsService = new google.maps.DirectionsService();
@@ -119,12 +138,16 @@ function calculateRoute() {
     const start = startPlace.geometry.location;
     const end = endPlace.geometry.location;
 
+    if (!isAccessibleRoute(start, end)) {
+        alert("There is no accessible route between these points.");
+        return;
+    }
+
     // Directions request for walking
     const request = {
         origin: start,
         destination: end,
         travelMode: google.maps.TravelMode.WALKING,
-        wheelchairAccessible: true
     };
 
     directionsService.route(request, (result, status) => {
@@ -136,4 +159,45 @@ function calculateRoute() {
             alert("Could not retrieve directions. Please check your inputs.");
         }
     });
+}
+
+// Function to check if a route is in the list of accessible routes
+function isAccessibleRoute(startLocation, endLocation) {
+    const accessibleRoutes = [
+        { start: { lat: 40.807722, lng: -73.962222 }, end: { lat: 40.806503, lng: -73.961698 } }, // Accessible route 1
+        { start: { lat: 40.807535, lng: -73.964766 }, end: { lat: 40.809045, lng: -73.960683 } }, // Accessible route 2
+        { start: { lat: 40.808691, lng: -73.961296 }, end: { lat: 40.807895, lng: -73.962555 } }, // Accessible route 3
+        // Add more accessible routes here
+    ];
+
+    const distanceThreshold = 40; // 40 meters, 150 ish feet
+
+    return accessibleRoutes.some(route => {
+        // Check distances from the user's start to both start and end of the route
+        const distanceStartToRouteStart = getDistance(startLocation, route.start);
+        const distanceStartToRouteEnd = getDistance(startLocation, route.end);
+        const minStartDistance = Math.min(distanceStartToRouteStart, distanceStartToRouteEnd);
+
+        // Check distances from the user's end to both start and end of the route
+        const distanceEndToRouteStart = getDistance(endLocation, route.start);
+        const distanceEndToRouteEnd = getDistance(endLocation, route.end);
+        const minEndDistance = Math.min(distanceEndToRouteStart, distanceEndToRouteEnd);
+
+        // Check if the user's start or end is within the threshold distance of the accessible route
+        return (minStartDistance <= distanceThreshold || minEndDistance <= distanceThreshold);
+    });
+}
+
+// Function to calculate the distance between two coordinates (in lat/lng)
+function getDistance(coord1, coord2) {
+    const R = 6371; // Radius of the Earth in km
+    const dLat = (coord2.lat - coord1.lat) * (Math.PI / 180);
+    const dLng = (coord2.lng - coord1.lng) * (Math.PI / 180);
+    const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(coord1.lat * (Math.PI / 180)) * Math.cos(coord2.lat * (Math.PI / 180)) *
+        Math.sin(dLng / 2) * Math.sin(dLng / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const distance = R * c; // Distance in km
+    return distance;
 }
