@@ -23,7 +23,11 @@ function initMap() {
 
     // DO STUFF HERE!!!!!!!
     const accessibleRoutes = [
-        { start: { lat: 40.8065385, lng: -73.9637180 }, end: { lat: 40.8074630, lng: -73.9629968 } }, // Accessible route 1
+        { start: { lat: 40.806932, lng: -73.963438 }, end: { lat: 40.807252, lng: -73.964216 } }, // Accessible route 1
+        { start: { lat: 40.807133, lng: -73.963929 }, end: { lat: 40.807358, lng: -73.963779 } }, // Accessible route 2
+        { start: { lat: 40.807445, lng: -73.963036 }, end: { lat: 40.807051, lng: -73.962086 } }, // Accessible route 3
+        { start: { lat: 40.807432316683844, lng: -73.96299710507577 }, end: { lat: 40.806657842222194, lng: -73.96376169347042 } }, // Accessible route 4
+
     ];
 
     const buildings = [
