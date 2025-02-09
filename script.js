@@ -72,7 +72,6 @@ function initMap() {
         { start: { lat: 40.807133, lng: -73.963929 }, end: { lat: 40.807358, lng: -73.963779 } }, // Accessible route 2
         { start: { lat: 40.807445, lng: -73.963036 }, end: { lat: 40.807051, lng: -73.962086 } }, // Accessible route 3
         { start: { lat: 40.807432316683844, lng: -73.96299710507577 }, end: { lat: 40.806657842222194, lng: -73.96376169347042 } }, // Accessible route 4
-
     ];
 
     const buildings = [
@@ -116,7 +115,7 @@ function initMap() {
         { "name": "Johnny's", "lat": 40.80602438304332, "lng": -73.96275370239007, "accessibleBuildingEntrance": false, "buildingElevator": false, "ramp": true, "accessibleBuildingAccessWithAuthorization": false, "restrictedAccessElevator": false, "wheelchairLift": false },
         { "name": "Chef Don's Pizza Pi", "lat": 40.809423710181996, "lng": -73.95992575511308, "accessibleBuildingEntrance": true, "buildingElevator": true, "ramp": false, "accessibleBuildingAccessWithAuthorization": false, "restrictedAccessElevator": false, "wheelchairLift": false },
         { "name": "Blue Java Café - Uris",  "lat": 40.80904937459882, "lng": -73.96122323066608, "accessibleBuildingEntrance": true, "buildingElevator": true, "ramp": true, "accessibleBuildingAccessWithAuthorization": false, "restrictedAccessElevator": false, "wheelchairLift": false },
-        { "name": "Blue Java Café - Butler", "lat": 40.806358371702046, "lng": -73.96319231812728, "accessibleBuildingEntrance": true, "buildingElevator": true, "ramp": true, "accessibleBuildingAccessWithAuthorization": false, "restrictedAccessElevator": false, "wheelchairLift": false }
+        { "name": "Blue Java Café - Butler", "lat": 40.806358371702046, "lng": -73.96319231812728, "accessibleBuildingEntrance": true, "buildingElevator": true, "ramp": true, "accessibleBuildingAccessWithAuthorization": false, "restrictedAccessElevator": false, "wheelchairLift": false },
         { "name": "Blue Java Café - Mudd", "lat": 40.809423710181996, "lng": -73.95992575511308, "accessibleBuildingEntrance": true, "buildingElevator": true, "ramp": false, "accessibleBuildingAccessWithAuthorization": false, "restrictedAccessElevator": false, "wheelchairLift": false },
     ];
  
