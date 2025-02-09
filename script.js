@@ -1,4 +1,21 @@
 let map, directionsService, directionsRenderer, startAutocomplete, endAutocomplete;
+
+let showBuildings = false;
+let showDining = false;
+let showEntrances = false;
+
+//update checkbox state
+function updateCheckboxState() {
+    showBuildings = document.getElementById("buildings").checked;
+    showDining = document.getElementById("dining").checked;
+    showEntrances = document.getElementById("entrances").checked;
+}
+
+//add event listener
+document.getElementById("buildings").addEventListener("change", updateCheckboxState);
+document.getElementById("dining").addEventListener("change", updateCheckboxState);
+document.getElementById("entrances").addEventListener("change", updateCheckboxState);
+
 function adjustContentPosition() {
     let header = document.getElementById('header');
     let searchBars = document.querySelector(".searchBars");
@@ -103,7 +120,10 @@ function initMap() {
         center: campusCenter,
     });
 
-    buildings.forEach(building => createMarker(building, map));
+    if (showBuildings) buildings.forEach(building => createMarker(building, map, 'building'));
+    if (showDining) dining_spots.forEach(dining_spots => createMarker(dining_spots, map, 'dining'));
+    if (showEntrances) campus_entrances.forEach(campus_entrances => createMarker(campus_entrances, map, 'campus_entrance'));
+
     accessibleRoutes.forEach(route => {
         const accessiblePolyline = new google.maps.Polyline({
             path: [route.start, route.end],
@@ -130,33 +150,74 @@ function initMap() {
     endAutocomplete.addListener("place_changed", calculateRoute);
 }
 
-function createMarker(building, map) {
-    const markerColor = building.accessibleBuildingEntrance ? "green" : "red";
+function createMarker(item, map, type) {
+    let markerColor;
+    let iconURL;
+    let content;
 
-    // "accessibleCampusEntrance": true, "accessibleBuildingEntrance": true, "buildingElevator": false, "ramp": false, "accessibleBuildingAccessWithAuthorization": false, "restrictedAccessElevator": false, "wheelchairLift": false },
+    // Set the marker color and content based on the item type
+    if (type === 'building') {
+        markerColor = item.accessibleBuildingEntrance ? "green" : "red";
+        content = `
+            <strong>${item.name}</strong><br>
+            <ul>
+                <li><strong>Accessible Building Entrance:</strong> ${item.accessibleBuildingEntrance ? "Yes" : "No"}</li>
+                <li><strong>Building Elevator:</strong> ${item.buildingElevator ? "Yes" : "No"}</li>
+                <li><strong>Ramp Available:</strong> ${item.ramp ? "Yes" : "No"}</li>
+                <li><strong>Accessible Building Access (with Authorization):</strong> ${item.accessibleBuildingAccessWithAuthorization ? "Yes" : "No"}</li>
+                <li><strong>Restricted Access Elevator:</strong> ${item.restrictedAccessElevator ? "Yes" : "No"}</li>
+                <li><strong>Wheelchair Lift:</strong> ${item.wheelchairLift ? "Yes" : "No"}</li>
+            </ul>
+        `;
+        iconURL = `http://maps.google.com/mapfiles/ms/icons/${markerColor}-dot.png`;
+        //iconURL = https://maps.google.com/mapfiles/kml/paddle/red-stars-lv.png
+
+    } else if (type === 'campus_entrance') {
+        content = `
+            <strong>${item.name}</strong><br>
+            <ul>
+                <li><strong>Accessible Campus Entrance:</strong> ${item.accessibleCampusEntrance ? "Yes" : "No"}</li>
+                <li><strong>Building Elevator:</strong> ${item.buildingElevator ? "Yes" : "No"}</li>
+                <li><strong>Ramp Available:</strong> ${item.ramp ? "Yes" : "No"}</li>
+                <li><strong>Accessible Building Access (with Authorization):</strong> ${item.accessibleBuildingAccessWithAuthorization ? "Yes" : "No"}</li>
+                <li><strong>Restricted Access Elevator:</strong> ${item.restrictedAccessElevator ? "Yes" : "No"}</li>
+                <li><strong>Wheelchair Lift:</strong> ${item.wheelchairLift ? "Yes" : "No"}</li>
+            </ul>
+        `;
+        iconURL = 'https://maps.google.com/mapfiles/kml/shapes/highway.png';
+
+    } else if (type === 'dining') {
+        markerColor = item.accessibleBuildingEntrance ? "green" : "red";
+        content = `
+            <strong>${item.name}</strong><br>
+            <ul>
+                <li><strong>Accessible Building Entrance:</strong> ${item.accessibleBuildingEntrance ? "Yes" : "No"}</li>
+                <li><strong>Building Elevator:</strong> ${item.buildingElevator ? "Yes" : "No"}</li>
+                <li><strong>Ramp Available:</strong> ${item.ramp ? "Yes" : "No"}</li>
+                <li><strong>Accessible Building Access (with Authorization):</strong> ${item.accessibleBuildingAccessWithAuthorization ? "Yes" : "No"}</li>
+                <li><strong>Restricted Access Elevator:</strong> ${item.restrictedAccessElevator ? "Yes" : "No"}</li>
+                <li><strong>Wheelchair Lift:</strong> ${item.wheelchairLift ? "Yes" : "No"}</li>
+            </ul>
+        `;
+        iconURL = `http://maps.google.com/mapfiles/ms/icons/${markerColor}-dot.png`;
+        //iconURL = 'https://maps.google.com/mapfiles/kml/paddle/grn-circle-lv.png';
+
+    }
 
     const marker = new google.maps.Marker({
-        position: { lat: building.lat, lng: building.lng },
+        position: { lat: item.lat, lng: item.lng },
         map: map,
-        title: building.name,
-        icon: `http://maps.google.com/mapfiles/ms/icons/${markerColor}-dot.png`,
+        title: item.name,
+        icon: iconURL
     });
 
+
+    // Create the info window
     const infowindow = new google.maps.InfoWindow({
-        content: `
-            <strong>${building.name}</strong><br>
-            <ul>
-                <li><strong>Accessible Campus Entrance:</strong> ${building.accessibleCampusEntrance ? "Yes" : "No"}</li>
-                <li><strong>Accessible Building Entrance:</strong> ${building.accessibleBuildingEntrance ? "Yes" : "No"}</li>
-                <li><strong>Building Elevator:</strong> ${building.buildingElevator ? "Yes" : "No"}</li>
-                <li><strong>Ramp Available:</strong> ${building.ramp ? "Yes" : "No"}</li>
-                <li><strong>Accessible Building Access (with Authorization):</strong> ${building.accessibleBuildingAccessWithAuthorization ? "Yes" : "No"}</li>
-                <li><strong>Restricted Access Elevator:</strong> ${building.restrictedAccessElevator ? "Yes" : "No"}</li>
-                <li><strong>Wheelchair Lift:</strong> ${building.wheelchairLift ? "Yes" : "No"}</li>
-            </ul>
-        `
+        content: content
     });
 
+    // Add click listener to open info window
     marker.addListener("click", () => {
         infowindow.open(map, marker);
     });
