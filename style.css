@@ -106,11 +106,18 @@ p {
     /* font-family: 'Proxima Nova'; */
 }
 
+.checkboxContainer {
+    margin-top: 100px;
+}
+
+.showFeature {
+    font-family: 'Open Sans';
+    color: #112A46;
+}
 
 #map {
     height: 100vh;
     width: 100%;
-    margin-top: 10px; /* Creates space between search bars and map */
 }
 
 /*For reports page*/
