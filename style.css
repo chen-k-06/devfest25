@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500&family=Open+Sans:wght@400;600&display=swap');
+
 :root {
     --header-height: 80px; /* Define a variable */
 }
@@ -9,15 +11,15 @@ html {
 
 body {
     background-color: #b9d9eb;
-    font-family: 'Proxima Nova';
+    font-family: 'Open Sans';
 }
 
-@font-face {
+/* @font-face {
     font-family: 'Proxima Nova';
     src: url('fonts/proximanova_regular.ttf') format('truetype');
     font-weight: bold;
     font-style: normal;
-}
+} */
 
 /* CSS */
 nav {
@@ -26,6 +28,7 @@ nav {
     align-items: flex-start;
     padding: 1rem;
     background: #f8f9fa;
+    font-family: 'Raleway';
 }
 
 .branding {
@@ -37,6 +40,7 @@ nav {
     display: flex;
     gap: 1rem;
     margin-top: 0.5rem; /* Adjust to align vertically with title */
+    font-family: 'Open Sans';
 }
 
 .nav-btn {
@@ -46,6 +50,7 @@ nav {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    font-family: 'Open Sans';
 }
 
 /* Keep your existing styles for h1 and p */
@@ -56,7 +61,6 @@ h1 {
 
 p {
     margin: 0.5rem 0 0 0;
-    color: #666;
 }
 /*
 .headerBar {
@@ -94,6 +98,7 @@ p {
     margin: 10px auto;
     display: block;
     font-size: 16px;
+    font-family: 'Open Sans';
     /* font-family: 'Proxima Nova'; */
 }
 

@@ -124,6 +124,7 @@ function calculateRoute() {
         origin: start,
         destination: end,
         travelMode: google.maps.TravelMode.WALKING,
+        wheelchairAccessible: true
     };
 
     directionsService.route(request, (result, status) => {
