@@ -23,10 +23,7 @@ function initMap() {
 
     // DO STUFF HERE!!!!!!!
     const accessibleRoutes = [
-        { start: { lat: 40.807722, lng: -73.962222 }, end: { lat: 40.806503, lng: -73.961698 } }, // Accessible route 1
-        { start: { lat: 40.807535, lng: -73.964766 }, end: { lat: 40.809045, lng: -73.960683 } }, // Accessible route 2
-        { start: { lat: 40.808691, lng: -73.961296 }, end: { lat: 40.807895, lng: -73.962555 } }, // Accessible route 3
-        // Add more accessible routes here
+        { start: { lat: 40.8065385, lng: -73.9637180 }, end: { lat: 40.8074630, lng: -73.9629968 } }, // Accessible route 1
     ];
 
     const buildings = [
@@ -80,8 +77,20 @@ function initMap() {
     { "name": "Schapiro entrance", "lat": 40.80979726892658, "lng": -73.96074790408879, "accessibleCampusEntrance": true, "accessibleBuildingEntrance": true, "buildingElevator": false, "ramp": false, "accessibleBuildingAccessWithAuthorization": false, "restrictedAccessElevator": false, "wheelchairLift": false },
     { "name": "Computer Science entrance", "lat": 40.80933603350681, "lng": -73.95972463697046, "accessibleCampusEntrance": true, "accessibleBuildingEntrance": true, "buildingElevator": false, "ramp": false, "accessibleBuildingAccessWithAuthorization": false, "restrictedAccessElevator": false, "wheelchairLift": false },
     { "name": "115th & Broadway entrance", "lat": 40.80724773603954, "lng": -73.96419603111585, "accessibleCampusEntrance": true, "accessibleBuildingEntrance": true, "buildingElevator": false, "ramp": false, "accessibleBuildingAccessWithAuthorization": false, "restrictedAccessElevator": false, "wheelchairLift": false }
-
     ];
+
+    // Initialize Directions Service and Renderer
+    directionsService = new google.maps.DirectionsService();
+    directionsRenderer = new google.maps.DirectionsRenderer();
+    directionsRenderer.setMap(map);
+
+    // Autocomplete for start and end locations
+    startAutocomplete = new google.maps.places.Autocomplete(document.getElementById("searchBarStart"));
+    endAutocomplete = new google.maps.places.Autocomplete(document.getElementById("searchBarEnd"));
+
+    // Listen for place changes to trigger route calculation
+    startAutocomplete.addListener("place_changed", calculateRoute);
+    endAutocomplete.addListener("place_changed", calculateRoute);
 
 
     // Initialize map
@@ -118,7 +127,10 @@ function initMap() {
 }
 
 function createMarker(building, map) {
-    const markerColor = building.accessible ? "green" : "red";
+    const markerColor = building.accessibleBuildingEntrance ? "green" : "red";
+
+    // "accessibleCampusEntrance": true, "accessibleBuildingEntrance": true, "buildingElevator": false, "ramp": false, "accessibleBuildingAccessWithAuthorization": false, "restrictedAccessElevator": false, "wheelchairLift": false },
+
     const marker = new google.maps.Marker({
         position: { lat: building.lat, lng: building.lng },
         map: map,
@@ -127,7 +139,18 @@ function createMarker(building, map) {
     });
 
     const infowindow = new google.maps.InfoWindow({
-        content: `<strong>${building.name}</strong><br>${building.accessible ? "Wheelchair Accessible" : "Not Accessible"}`,
+        content: `
+            <strong>${building.name}</strong><br>
+            <ul>
+                <li><strong>Accessible Campus Entrance:</strong> ${building.accessibleCampusEntrance ? "Yes" : "No"}</li>
+                <li><strong>Accessible Building Entrance:</strong> ${building.accessibleBuildingEntrance ? "Yes" : "No"}</li>
+                <li><strong>Building Elevator:</strong> ${building.buildingElevator ? "Yes" : "No"}</li>
+                <li><strong>Ramp Available:</strong> ${building.ramp ? "Yes" : "No"}</li>
+                <li><strong>Accessible Building Access (with Authorization):</strong> ${building.accessibleBuildingAccessWithAuthorization ? "Yes" : "No"}</li>
+                <li><strong>Restricted Access Elevator:</strong> ${building.restrictedAccessElevator ? "Yes" : "No"}</li>
+                <li><strong>Wheelchair Lift:</strong> ${building.wheelchairLift ? "Yes" : "No"}</li>
+            </ul>
+        `
     });
 
     marker.addListener("click", () => {
