@@ -103,20 +103,6 @@ function initMap() {
     { "name": "115th & Broadway entrance", "lat": 40.80724773603954, "lng": -73.96419603111585, "accessibleCampusEntrance": true }
     ];
 
-    // Initialize Directions Service and Renderer
-    directionsService = new google.maps.DirectionsService();
-    directionsRenderer = new google.maps.DirectionsRenderer();
-    directionsRenderer.setMap(map);
-
-    // Autocomplete for start and end locations
-    startAutocomplete = new google.maps.places.Autocomplete(document.getElementById("searchBarStart"));
-    endAutocomplete = new google.maps.places.Autocomplete(document.getElementById("searchBarEnd"));
-
-    // Listen for place changes to trigger route calculation
-    startAutocomplete.addListener("place_changed", calculateRoute);
-    endAutocomplete.addListener("place_changed", calculateRoute);
-
-
     // Initialize map
     map = new google.maps.Map(document.getElementById("map"), {
         zoom: 16,
@@ -138,7 +124,6 @@ function initMap() {
 
         accessiblePolyline.setMap(map);
     });
-
     // Initialize Directions Service and Renderer
     directionsService = new google.maps.DirectionsService();
     directionsRenderer = new google.maps.DirectionsRenderer();
@@ -297,20 +282,11 @@ function calculateRoute() {
     const start = startPlace.geometry.location;
     const end = endPlace.geometry.location;
 
-    // Get accessible routes within range of start and end points
-    const accessibleRoutesInRange = getAccessibleRoutes(start, end, accessibleRoutes);
-
-    // If there are no accessible routes within range, show an alert
-    if (accessibleRoutesInRange.length === 0) {
-        alert("There is no accessible route between these points.");
-        return;
-    }
-
-    // Request for directions using the first accessible route found
+    // Directions request for walking
     const request = {
-        origin: accessibleRoutesInRange[0].start,
-        destination: accessibleRoutesInRange[0].end,
-        travelMode: google.maps.TravelMode.WALKING
+        origin: start,
+        destination: end,
+        travelMode: google.maps.TravelMode.WALKING,
     };
 
     directionsService.route(request, (result, status) => {
@@ -322,4 +298,30 @@ function calculateRoute() {
             alert("Could not retrieve directions. Please check your inputs.");
         }
     });
+
+    // // Get accessible routes within range of start and end points
+    // const accessibleRoutesInRange = getAccessibleRoutes(start, end, accessibleRoutes);
+
+    // // If there are no accessible routes within range, show an alert
+    // if (accessibleRoutesInRange.length === 0) {
+    //     alert("There is no accessible route between these points.");
+    //     return;
+    // }
+
+    // // Request for directions using the first accessible route found
+    // const request = {
+    //     origin: accessibleRoutesInRange[0].start,
+    //     destination: accessibleRoutesInRange[0].end,
+    //     travelMode: google.maps.TravelMode.WALKING
+    // };
+
+    // directionsService.route(request, (result, status) => {
+    //     if (status === google.maps.DirectionsStatus.OK) {
+    //         directionsRenderer.setDirections(result);
+    //         const walkingTime = result.routes[0].legs[0].duration.text;
+    //         alert(`Estimated Walking Time: ${walkingTime}`);
+    //     } else {
+    //         alert("Could not retrieve directions. Please check your inputs.");
+    //     }
+    // });
 }
