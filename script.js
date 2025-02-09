@@ -135,28 +135,91 @@ function createMarker(building, map) {
     });
 }
 
+// Helper function to calculate the distance between two LatLng points
+function getDistance(latLng1, latLng2) {
+    const R = 3958.8; // Earth radius in miles
+    const lat1 = latLng1.lat();
+    const lng1 = latLng1.lng();
+    const lat2 = latLng2.lat();
+    const lng2 = latLng2.lng();
+    const dLat = degreesToRadians(lat2 - lat1);
+    const dLng = degreesToRadians(lng2 - lng1);
+
+    const a = Math.sin(dLat / 2) ** 2 + Math.cos(degreesToRadians(lat1)) * Math.cos(degreesToRadians(lat2)) * Math.sin(dLng / 2) ** 2;
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c * 5280; // Distance in feet
+}
+
+function degreesToRadians(degrees) {
+    return degrees * (Math.PI / 180);
+}
+
+// Helper to calculate perpendicular distance from point to line segment
+function pointToLineDistance(point, lineStart, lineEnd) {
+    const A = point.lat() - lineStart.lat();
+    const B = point.lng() - lineStart.lng();
+    const C = lineEnd.lat() - lineStart.lat();
+    const D = lineEnd.lng() - lineStart.lng();
+
+    const dot = A * C + B * D;
+    const len_sq = C * C + D * D;
+    let param = dot / len_sq;
+
+    if (param < 0) param = 0;
+    else if (param > 1) param = 1;
+
+    const nearestLat = lineStart.lat() + param * C;
+    const nearestLng = lineStart.lng() + param * D;
+
+    const nearestPoint = new google.maps.LatLng(nearestLat, nearestLng);
+
+    return getDistance(point, nearestPoint);
+}
+
+// Accessible Routes Algorithm
+function getAccessibleRoutes(startLocation, endLocation, accessibleRoutes) {
+    const closeRoutes = [];
+
+    accessibleRoutes.forEach(route => {
+        const startToRouteDistance = pointToLineDistance(startLocation, route.start, route.end);
+        const endToRouteDistance = pointToLineDistance(endLocation, route.start, route.end);
+
+        // If both start and end points are within 30 meters (100 feet ≈ 30 meters)
+        if (startToRouteDistance <= 30 && endToRouteDistance <= 30) {
+            closeRoutes.push(route);
+        }
+    });
+
+    return closeRoutes;
+}
+
+// Function to calculate the route
 function calculateRoute() {
     const startPlace = startAutocomplete.getPlace();
     const endPlace = endAutocomplete.getPlace();
 
-    if (!startPlace || !endPlace) {
-        alert("Please select both start and destination locations.");
+    if (!startPlace || !endPlace || !startPlace.geometry || !endPlace.geometry) {
+        alert("Please select valid start and destination locations.");
         return;
     }
 
     const start = startPlace.geometry.location;
     const end = endPlace.geometry.location;
 
-    if (!isAccessibleRoute(start, end)) {
+    // Get accessible routes within range of start and end points
+    const accessibleRoutesInRange = getAccessibleRoutes(start, end, accessibleRoutes);
+
+    // If there are no accessible routes within range, show an alert
+    if (accessibleRoutesInRange.length === 0) {
         alert("There is no accessible route between these points.");
         return;
     }
 
-    // Directions request for walking
+    // Request for directions using the first accessible route found
     const request = {
-        origin: start,
-        destination: end,
-        travelMode: google.maps.TravelMode.WALKING,
+        origin: accessibleRoutesInRange[0].start,
+        destination: accessibleRoutesInRange[0].end,
+        travelMode: google.maps.TravelMode.WALKING
     };
 
     directionsService.route(request, (result, status) => {
@@ -168,50 +231,4 @@ function calculateRoute() {
             alert("Could not retrieve directions. Please check your inputs.");
         }
     });
-}
-
-// Function to check if a route is in the list of accessible routes
-function isAccessibleRoute(startLocation, endLocation) {
-    const accessibleRoutes = [
-        { start: { lat: 40.807722, lng: -73.962222 }, end: { lat: 40.806503, lng: -73.961698 } }, // Accessible route 1
-        { start: { lat: 40.807535, lng: -73.964766 }, end: { lat: 40.809045, lng: -73.960683 } }, // Accessible route 2
-        { start: { lat: 40.808691, lng: -73.961296 }, end: { lat: 40.807895, lng: -73.962555 } }, // Accessible route 3
-        // Add more accessible routes here
-    ];
-
-    const distanceThreshold = 40; // 40 meters, 150 ish feet
-
-    return accessibleRoutes.some(route => {
-        // Check distances from the user's start to both start and end of the route
-        const distanceStartToRouteStart = getDistance(startLocation, route.start);
-        const distanceStartToRouteEnd = getDistance(startLocation, route.end);
-        const minStartDistance = Math.min(distanceStartToRouteStart, distanceStartToRouteEnd);
-
-        // Check distances from the user's end to both start and end of the route
-        const distanceEndToRouteStart = getDistance(endLocation, route.start);
-        const distanceEndToRouteEnd = getDistance(endLocation, route.end);
-        const minEndDistance = Math.min(distanceEndToRouteStart, distanceEndToRouteEnd);
-
-        // Check if the user's start or end is within the threshold distance of the accessible route
-        return (minStartDistance <= distanceThreshold || minEndDistance <= distanceThreshold);
-    });
-}
-
-// Helper function to calculate the perpendicular distance from a point to a line
-function pointToLineDistance(point, lineStart, lineEnd) {
-    const lineLength = getDistance(lineStart, lineEnd);
-    if (lineLength === 0) return getDistance(point, lineStart); // Avoid division by zero
-
-    // Project the point onto the line
-    const t = ((point.lat() - lineStart.lat()) * (lineEnd.lat() - lineStart.lat()) + (point.lng() - lineStart.lng()) * (lineEnd.lng() - lineStart.lng())) / (lineLength * lineLength);
-
-    // Check if the perpendicular projection falls on the line segment
-    if (t < 0) return getDistance(point, lineStart); // Closest to the start point
-    if (t > 1) return getDistance(point, lineEnd); // Closest to the end point
-
-    // Find the projected point on the line
-    const projection = new google.maps.LatLng(lineStart.lat() + t * (lineEnd.lat() - lineStart.lat()), lineStart.lng() + t * (lineEnd.lng() - lineStart.lng()));
-
-    // Return the distance from the point to the projected point
-    return getDistance(point, projection);
 }
