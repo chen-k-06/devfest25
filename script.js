@@ -93,7 +93,7 @@ function initMap() {
         { start: { lat: 40.807525, lng: -73.961748 }, end: { lat: 40.807348, lng: -73.961319 } }, // to kent 
         // { start: { lat: , lng: }, end: { lat: , lng:  } }, // low to mudd
         // { start: { lat: , lng: }, end: { lat: , lng:  } }, // low to uris, west
-        { start: { lat: , lng: }, end: { lat: , lng:  } }, // lewisohn
+        { start: { lat: 40.8080864754902, lng: -73.96262080759266 }, end: { lat: 40.808293740021185, lng: -73.96309684510324 } }, // lewisohn
         // { start: { lat: , lng: }, end: { lat: , lng:  } }, // lewisohn
         // { start: { lat: , lng: }, end: { lat: , lng:  } }, // lewisohn
         // { start: { lat: , lng: }, end: { lat: , lng:  } }, // lewisohn
