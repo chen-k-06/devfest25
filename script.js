@@ -4,42 +4,45 @@ let showBuildings = true;
 let showDining = true;
 let showEntrances = true;
 let markers = [];
+let buildings = [];
+let dining_spots = [];
+let campus_entrances = [];
 
-// function clearMarkers() {
-//     markers.forEach(marker => {
-//         marker.setMap(null); // Removes marker from the map
-//     });
-//     markers = []; // Clears the markers array
-// }
+function clearMarkers() {
+    markers.forEach(marker => {
+        marker.setMap(null); // Removes marker from the map
+    });
+    markers = []; // Clears the markers array
+}
 
-// function updateCheckboxState() {
-//     // Update the checkbox states
-//     showBuildings = document.getElementById("buildings").checked;
-//     showDining = document.getElementById("dining").checked;
-//     showEntrances = document.getElementById("entrances").checked;
+function updateCheckboxState() {
+    // Update the checkbox states
+    showBuildings = document.getElementById("buildings").checked;
+    showDining = document.getElementById("dining").checked;
+    showEntrances = document.getElementById("entrances").checked;
 
-//     // Clear existing markers
-//     clearMarkers();
+    // Clear existing markers
+    clearMarkers();
 
-//     // Add new markers based on the updated states
-//     if (showBuildings) {
-//         buildings.forEach(building => createMarker(building, map, 'building'));
-//     }
-//     if (showDining) {
-//         dining_spots.forEach(spot => createMarker(spot, map, 'dining'));
-//     }
-//     if (showEntrances) {
-//         campus_entrances.forEach(entrance => createMarker(entrance, map, 'campus_entrance'));
-//     }
-// }
+    // Add new markers based on the updated states
+    if (showBuildings) {
+        buildings.forEach(building => createMarker(building, map, 'building'));
+    }
+    if (showDining) {
+        dining_spots.forEach(spot => createMarker(spot, map, 'dining'));
+    }
+    if (showEntrances) {
+        campus_entrances.forEach(entrance => createMarker(entrance, map, 'campus_entrance'));
+    }
+}
 
-// //add event listener
-// document.getElementById("buildings").addEventListener("change", updateCheckboxState);
-// document.getElementById("dining").addEventListener("change", updateCheckboxState);
-// document.getElementById("entrances").addEventListener("change", updateCheckboxState);
-// document.addEventListener("DOMContentLoaded", function() {
-//     updateCheckboxState(); // Initialize the map based on the initial checkbox state
-// });
+//add event listener
+document.getElementById("buildings").addEventListener("change", updateCheckboxState);
+document.getElementById("dining").addEventListener("change", updateCheckboxState);
+document.getElementById("entrances").addEventListener("change", updateCheckboxState);
+document.addEventListener("DOMContentLoaded", function() {
+    updateCheckboxState(); // Initialize the map based on the initial checkbox state
+});
 
 function adjustContentPosition() {
     let header = document.getElementById('header');
@@ -106,7 +109,7 @@ function initMap() {
 
     ];
 
-    const buildings = [
+    buildings = [
         { "name": "Northwest Corner Science Building", "lat": 40.810126869634149, "lng": -73.96194424631715, "accessibleBuildingEntrance": true, "buildingElevator": true, "ramp": false, "accessibleBuildingAccessWithAuthorization": false, "restrictedAccessElevator": false, "wheelchairLift": false },
         { "name": "Pupin Hall", "lat": 40.81006, "lng": -73.96135, "accessibleBuildingEntrance": true, "buildingElevator": true, "ramp": false, "accessibleBuildingAccessWithAuthorization": false, "restrictedAccessElevator": true, "wheelchairLift": false },
         { "name": "Schapiro Center for Engineering and Physical Science Research (CEPSR)", "lat": 40.809743982099086, "lng": -73.96070978467252, "accessibleBuildingEntrance": true, "buildingElevator": true, "ramp": true, "accessibleBuildingAccessWithAuthorization": false, "restrictedAccessElevator": false, "wheelchairLift": false },
@@ -139,7 +142,7 @@ function initMap() {
         { "name": "Butler Library", "lat": 40.806358371702046, "lng": -73.96319231812728, "accessibleBuildingEntrance": true, "buildingElevator": true, "ramp": true, "accessibleBuildingAccessWithAuthorization": false, "restrictedAccessElevator": false, "wheelchairLift": false }
     ];
 
-    const dining_spots = [
+    dining_spots = [
         { "name": "Ferris", "lat": 40.806856929097954, "lng": -73.9640194216417, "accessibleBuildingEntrance": true, "buildingElevator": true, "ramp": true, "accessibleBuildingAccessWithAuthorization": false, "restrictedAccessElevator": true, "wheelchairLift": false },
         { "name": "JJ's", "lat": 40.80585424592349, "lng": -73.96236550336536, "accessibleBuildingEntrance": false, "buildingElevator": false, "ramp": false, "accessibleBuildingAccessWithAuthorization": true, "restrictedAccessElevator": false, "wheelchairLift": false },
         { "name": "John Jay", "lat": 40.80585231334633, "lng": -73.96236717239124, "accessibleBuildingEntrance": true, "buildingElevator": true, "ramp": false, "accessibleBuildingAccessWithAuthorization": false, "restrictedAccessElevator": false, "wheelchairLift": false },
@@ -151,7 +154,7 @@ function initMap() {
         { "name": "Blue Java Café - Mudd", "lat": 40.809423710181996, "lng": -73.95992575511308, "accessibleBuildingEntrance": true, "buildingElevator": true, "ramp": false, "accessibleBuildingAccessWithAuthorization": false, "restrictedAccessElevator": false, "wheelchairLift": false },
     ];
 
-    const campus_entrances = [{ "name": "116th & Broadway entrance", "lat": 40.80794393404023, "lng": -73.9637138727193, "accessibleCampusEntrance": true },
+    campus_entrances = [{ "name": "116th & Broadway entrance", "lat": 40.80794393404023, "lng": -73.9637138727193, "accessibleCampusEntrance": true },
     { "name": "116th & Amsterdam entrance", "lat": 40.80687583997451, "lng": -73.96117616184806, "accessibleCampusEntrance": true },
     { "name": "Northwest Corner entrance", "lat": 40.81028600452615, "lng": -73.96189101481595, "accessibleCampusEntrance": true },
     { "name": "Schapiro entrance", "lat": 40.80979726892658, "lng": -73.96074790408879, "accessibleCampusEntrance": true },
