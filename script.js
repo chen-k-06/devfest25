@@ -1,45 +1,45 @@
 let map, directionsService, directionsRenderer, startAutocomplete, endAutocomplete;
 
-let showBuildings = false;
-let showDining = false;
-let showEntrances = false;
+let showBuildings = true;
+let showDining = true;
+let showEntrances = true;
 let markers = [];
 
-function clearMarkers() {
-    markers.forEach(marker => {
-        marker.setMap(null); // Removes marker from the map
-    });
-    markers = []; // Clears the markers array
-}
+// function clearMarkers() {
+//     markers.forEach(marker => {
+//         marker.setMap(null); // Removes marker from the map
+//     });
+//     markers = []; // Clears the markers array
+// }
 
-function updateCheckboxState() {
-    // Update the checkbox states
-    showBuildings = document.getElementById("buildings").checked;
-    showDining = document.getElementById("dining").checked;
-    showEntrances = document.getElementById("entrances").checked;
+// function updateCheckboxState() {
+//     // Update the checkbox states
+//     showBuildings = document.getElementById("buildings").checked;
+//     showDining = document.getElementById("dining").checked;
+//     showEntrances = document.getElementById("entrances").checked;
 
-    // Clear existing markers
-    clearMarkers();
+//     // Clear existing markers
+//     clearMarkers();
 
-    // Add new markers based on the updated states
-    if (showBuildings) {
-        buildings.forEach(building => createMarker(building, map, 'building'));
-    }
-    if (showDining) {
-        dining_spots.forEach(spot => createMarker(spot, map, 'dining'));
-    }
-    if (showEntrances) {
-        campus_entrances.forEach(entrance => createMarker(entrance, map, 'campus_entrance'));
-    }
-}
+//     // Add new markers based on the updated states
+//     if (showBuildings) {
+//         buildings.forEach(building => createMarker(building, map, 'building'));
+//     }
+//     if (showDining) {
+//         dining_spots.forEach(spot => createMarker(spot, map, 'dining'));
+//     }
+//     if (showEntrances) {
+//         campus_entrances.forEach(entrance => createMarker(entrance, map, 'campus_entrance'));
+//     }
+// }
 
-//add event listener
-document.getElementById("buildings").addEventListener("change", updateCheckboxState);
-document.getElementById("dining").addEventListener("change", updateCheckboxState);
-document.getElementById("entrances").addEventListener("change", updateCheckboxState);
-document.addEventListener("DOMContentLoaded", function() {
-    updateCheckboxState(); // Initialize the map based on the initial checkbox state
-});
+// //add event listener
+// document.getElementById("buildings").addEventListener("change", updateCheckboxState);
+// document.getElementById("dining").addEventListener("change", updateCheckboxState);
+// document.getElementById("entrances").addEventListener("change", updateCheckboxState);
+// document.addEventListener("DOMContentLoaded", function() {
+//     updateCheckboxState(); // Initialize the map based on the initial checkbox state
+// });
 
 function adjustContentPosition() {
     let header = document.getElementById('header');
@@ -133,6 +133,16 @@ function initMap() {
         center: campusCenter,
     });
 
+    if (showBuildings) {
+        buildings.forEach(building => createMarker(building, map, 'building'));
+    }
+    if (showDining) {
+        dining_spots.forEach(spot => createMarker(spot, map, 'dining'));
+    }
+    if (showEntrances) {
+        campus_entrances.forEach(entrance => createMarker(entrance, map, 'campus_entrance'));
+    }
+
     accessibleRoutes.forEach(route => {
         const accessiblePolyline = new google.maps.Polyline({
             path: [route.start, route.end],
@@ -223,7 +233,7 @@ function createMarker(item, map, type) {
 
     // Create and attach an info window to the marker
     const infoWindow = new google.maps.InfoWindow({
-        content: `${item.name}` // Customize content as needed
+        content: content
     });
 
     marker.addListener("click", function() {
