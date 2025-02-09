@@ -53,6 +53,13 @@ body {
     align-self: flex-start; /* Ensure it aligns left */
 }
 
+.searchBars {
+    font-family: 'Proxima Nova';
+    font-size: 16px;
+    padding: 10px;
+    margin: 10px auto;
+    width: 80%
+}
 
 .searchBars input {
     width: 80%;
@@ -62,7 +69,6 @@ body {
     font-size: 16px;
     /* font-family: 'Proxima Nova'; */
 }
-
 
 #map {
     height: 100vh;
