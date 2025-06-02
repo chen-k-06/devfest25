@@ -215,11 +215,18 @@ function initMap() {
     directionsRenderer.setMap(map);
 
     // Autocomplete for start and end locations
-    startAutocomplete = new google.maps.places.Autocomplete(document.getElementById("searchBarStart"));
-    startAutocomplete.setFields(["geometry", "name"]);
-
-    endAutocomplete = new google.maps.places.Autocomplete(document.getElementById("searchBarEnd"));
-    endAutocomplete.setFields(["geometry", "name"]);
+    <>
+        <gmp-autocomplete
+            id="startAutocomplete"
+            placeholder="Enter Start Location..."
+            fields="geometry,name"
+        ></gmp-autocomplete>
+        
+        <gmp-autocomplete
+            id="endAutocomplete"
+            placeholder="Enter End Location..."
+            fields="geometry,name"
+        ></gmp-autocomplete></>
 
     // Listen for place changes to trigger route calculation
     let startLocation = null;
