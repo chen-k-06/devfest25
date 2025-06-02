@@ -324,15 +324,15 @@ function createMarker(item, map, type) {
     dot.style.transform = "translate(-10px, -20px)";
 
     const marker = new google.maps.marker.AdvancedMarkerElement({
-    position: { lat: item.lat, lng: item.lng },
-    map: map,
-    title: item.name,
-    content: dot
+        position: { lat: item.lat, lng: item.lng },
+        map: map,
+        title: item.name,
+        content: dot
     });
-
+    
     // Store marker in global array
     markers.push(marker);
-https://maps.google.com/mapfiles/ms/icons/green-dot.png
+
     // Create and attach an info window to the marker
     const infoWindow = new google.maps.InfoWindow({
         content: contentHTML
