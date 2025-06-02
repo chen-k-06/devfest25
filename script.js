@@ -214,19 +214,9 @@ function initMap() {
     directionsRenderer = new google.maps.DirectionsRenderer();
     directionsRenderer.setMap(map);
 
-    // Autocomplete for start and end locations
-    <>
-        <gmp-autocomplete
-            id="startAutocomplete"
-            placeholder="Enter Start Location..."
-            fields="geometry,name"
-        ></gmp-autocomplete>
-        
-        <gmp-autocomplete
-            id="endAutocomplete"
-            placeholder="Enter End Location..."
-            fields="geometry,name"
-        ></gmp-autocomplete></>
+    // Autocomplete for start and end locations removed
+    const startAutocomplete = document.getElementById("startAutocomplete");
+    const endAutocomplete = document.getElementById("endAutocomplete");
 
     // Listen for place changes to trigger route calculation
     let startLocation = null;
