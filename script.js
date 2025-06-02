@@ -214,17 +214,17 @@ function initMap() {
     directionsRenderer = new google.maps.DirectionsRenderer();
     directionsRenderer.setMap(map);
 
-    // Autocomplete for start and end locations removed
+    // Autocomplete for start and end locations
     const startAutocomplete = document.getElementById("startAutocomplete");
     const endAutocomplete = document.getElementById("endAutocomplete");
 
     // Listen for place changes to trigger route calculation
     let startLocation = null;
     let endLocation   = null;
-    startAutocomplete.addListener("place_changed", () => {
+    startAutocomplete.addEventListener("place_changed", () => {
         const place = startAutocomplete.getPlace();
         if (!place.geometry || !place.geometry.location) {
-            alert("Please select a place from the dropdown for Start.");
+            alert("Please select a valid Start location.");
             return;
         }
         startLocation = place.geometry.location;
@@ -233,10 +233,10 @@ function initMap() {
         }
     });
 
-    endAutocomplete.addListener("place_changed", () => {
+    endAutocomplete.addEventListener("place_changed", () => {
         const place = endAutocomplete.getPlace();
         if (!place.geometry || !place.geometry.location) {
-            alert("Please select a place from the dropdown for End.");
+            alert("Please select a valid End location.");
             return;
         }
         endLocation = place.geometry.location;
