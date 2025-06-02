@@ -214,43 +214,69 @@ function initMap() {
     directionsRenderer = new google.maps.DirectionsRenderer();
     directionsRenderer.setMap(map);
 
-    // // Autocomplete for start and end locations
-    // startAutocomplete = new google.maps.places.Autocomplete(document.getElementById("searchBarStart"));
-    // endAutocomplete = new google.maps.places.Autocomplete(document.getElementById("searchBarEnd"));
+    // Autocomplete for start and end locations
+    startAutocomplete = new google.maps.places.Autocomplete(document.getElementById("searchBarStart"));
+    startAutocomplete.setFields(["geometry", "name"]);
 
-    // // Listen for place changes to trigger route calculation
-    // startAutocomplete.addListener("place_changed", calculateRoute);
-    // endAutocomplete.addListener("place_changed", calculateRoute);
-  
-    const startEl = document.getElementById("searchBarStart");
-    const endEl   = document.getElementById("searchBarEnd");
-    const geocoder = new google.maps.Geocoder();
-    
+    endAutocomplete = new google.maps.places.Autocomplete(document.getElementById("searchBarEnd"));
+    endAutocomplete.setFields(["geometry", "name"]);
+
+    // Listen for place changes to trigger route calculation
     let startLocation = null;
     let endLocation   = null;
-    
-    // When user selects a place, geocode to get its LatLng
-    startEl.addEventListener("gmpx-placeautocomplete-placechanged", () => {
-      const address = startEl.value;
-      if (!address) return;
-      geocoder.geocode({ address: address }, (results, status) => {
-        if (status === "OK" && results[0]) {
-          startLocation = results[0].geometry.location;
-          if (endLocation) calculateRoute(); // only when both are defined
+    startAutocomplete.addListener("place_changed", () => {
+        const place = startAutocomplete.getPlace();
+        if (!place.geometry || !place.geometry.location) {
+            alert("Please select a place from the dropdown for Start.");
+            return;
         }
-      });
-    });
-    
-    endEl.addEventListener("gmpx-placeautocomplete-placechanged", () => {
-      const address = endEl.value;
-      if (!address) return;
-      geocoder.geocode({ address: address }, (results, status) => {
-        if (status === "OK" && results[0]) {
-          endLocation = results[0].geometry.location;
-          if (startLocation) calculateRoute(); // only when both are defined
+        startLocation = place.geometry.location;
+        if (endLocation) {
+            calculateRoute();
         }
-      });
     });
+
+    endAutocomplete.addListener("place_changed", () => {
+        const place = endAutocomplete.getPlace();
+        if (!place.geometry || !place.geometry.location) {
+            alert("Please select a place from the dropdown for End.");
+            return;
+        }
+        endLocation = place.geometry.location;
+        if (startLocation) {
+            calculateRoute();
+        }
+    });
+  
+    // const startEl = document.getElementById("searchBarStart");
+    // const endEl   = document.getElementById("searchBarEnd");
+    // const geocoder = new google.maps.Geocoder();
+    
+    // let startLocation = null;
+    // let endLocation   = null;
+    
+    // // When user selects a place, geocode to get its LatLng
+    // startEl.addEventListener("gmpx-placeautocomplete-placechanged", () => {
+    //   const address = startEl.value;
+    //   if (!address) return;
+    //   geocoder.geocode({ address: address }, (results, status) => {
+    //     if (status === "OK" && results[0]) {
+    //       startLocation = results[0].geometry.location;
+    //       if (endLocation) calculateRoute(); // only when both are defined
+    //     }
+    //   });
+    // });
+    
+    // endEl.addEventListener("gmpx-placeautocomplete-placechanged", () => {
+    //   const address = endEl.value;
+    //   if (!address) return;
+    //   geocoder.geocode({ address: address }, (results, status) => {
+    //     if (status === "OK" && results[0]) {
+    //       endLocation = results[0].geometry.location;
+    //       if (startLocation) calculateRoute(); // only when both are defined
+    //     }
+    //   });
+    // });
 
     updateCheckboxState();
 }
