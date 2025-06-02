@@ -34,8 +34,20 @@
   <!-- Start and End Search Bar -->
    <div class = "searchBars">
         <h3 class="searchText">Where do you want to go?</h3>
-        <input id="searchBarStart" type="text" placeholder="Enter Start Location...">
-        <input id="searchBarEnd" type="text" placeholder="Enter End Location...">
+        <gmpx-place-autocomplete
+          id="searchBarStart"
+          style="width: 100%"
+          placeholder="Start location"
+        ></gmpx-place-autocomplete>
+        
+        <gmpx-place-autocomplete
+          id="searchBarEnd"
+          style="width: 100%"
+          placeholder="End location"
+        ></gmpx-place-autocomplete>
+
+<!--         <input id="searchBarStart" type="text" placeholder="Enter Start Location...">
+        <input id="searchBarEnd" type="text" placeholder="Enter End Location..."> -->
    </div>
 
 
@@ -57,7 +69,13 @@
   <script
     async
     defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXYcZIS7fXp0_jMgZpzTECXy32QVVnOzk&callback=initMap&libraries=places">
+    src="https://maps.googleapis.com/maps/api/js?
+      key=AIzaSyAXYcZIS7fXp0_jMgZpzTECXy32QVVnOzk
+      &libraries=places
+      &v=weekly
+      &modules=placeautocomplete
+      &callback=initMap
+    ">
     </script>
 
 </body>
