@@ -212,13 +212,43 @@ function initMap() {
     directionsRenderer = new google.maps.DirectionsRenderer();
     directionsRenderer.setMap(map);
 
-    // Autocomplete for start and end locations
-    startAutocomplete = new google.maps.places.Autocomplete(document.getElementById("searchBarStart"));
-    endAutocomplete = new google.maps.places.Autocomplete(document.getElementById("searchBarEnd"));
+    // // Autocomplete for start and end locations
+    // startAutocomplete = new google.maps.places.Autocomplete(document.getElementById("searchBarStart"));
+    // endAutocomplete = new google.maps.places.Autocomplete(document.getElementById("searchBarEnd"));
 
-    // Listen for place changes to trigger route calculation
-    startAutocomplete.addListener("place_changed", calculateRoute);
-    endAutocomplete.addListener("place_changed", calculateRoute);
+    // // Listen for place changes to trigger route calculation
+    // startAutocomplete.addListener("place_changed", calculateRoute);
+    // endAutocomplete.addListener("place_changed", calculateRoute);
+  
+    const startEl = document.getElementById("searchBarStart");
+    const endEl   = document.getElementById("searchBarEnd");
+    const geocoder = new google.maps.Geocoder();
+    
+    let startLocation = null;
+    let endLocation   = null;
+    
+    // When user selects a place, geocode to get its LatLng
+    startEl.addEventListener("gmpx-placeautocomplete-placechanged", () => {
+      const address = startEl.value;
+      if (!address) return;
+      geocoder.geocode({ address: address }, (results, status) => {
+        if (status === "OK" && results[0]) {
+          startLocation = results[0].geometry.location;
+          if (endLocation) calculateRoute(); // only when both are defined
+        }
+      });
+    });
+    
+    endEl.addEventListener("gmpx-placeautocomplete-placechanged", () => {
+      const address = endEl.value;
+      if (!address) return;
+      geocoder.geocode({ address: address }, (results, status) => {
+        if (status === "OK" && results[0]) {
+          endLocation = results[0].geometry.location;
+          if (startLocation) calculateRoute(); // only when both are defined
+        }
+      });
+    });
 }
 
 function createMarker(item, map, type) {
@@ -359,33 +389,55 @@ function getAccessibleRoutes(startLocation, endLocation, accessibleRoutes) {
 
 // Function to calculate the route
 function calculateRoute() {
-    const startPlace = startAutocomplete.getPlace();
-    const endPlace = endAutocomplete.getPlace();
-
-    if (!startPlace || !endPlace || !startPlace.geometry || !endPlace.geometry) {
+    if (!startLocation || !endLocation) {
         alert("Please select valid start and destination locations.");
         return;
     }
-
-    const start = startPlace.geometry.location;
-    const end = endPlace.geometry.location;
-
-    // Directions request for walking
+    
     const request = {
-        origin: start,
-        destination: end,
+        origin: startLocation,
+        destination: endLocation,
         travelMode: google.maps.TravelMode.WALKING,
     };
-
+    
     directionsService.route(request, (result, status) => {
         if (status === google.maps.DirectionsStatus.OK) {
-            directionsRenderer.setDirections(result);
-            const walkingTime = result.routes[0].legs[0].duration.text;
-            alert(`Estimated Walking Time: ${walkingTime}`);
+              directionsRenderer.setDirections(result);
+              const walkingTime = result.routes[0].legs[0].duration.text;
+              alert(`Estimated Walking Time: ${walkingTime}`);
         } else {
-            alert("Could not retrieve directions. Please check your inputs.");
+              alert("Could not retrieve directions. Please check your inputs.");
         }
     });
+    
+    // Deprecated Google Maps API autocomplete functions
+    // const startPlace = startAutocomplete.getPlace();
+    // const endPlace = endAutocomplete.getPlace();
+
+    // if (!startPlace || !endPlace || !startPlace.geometry || !endPlace.geometry) {
+    //     alert("Please select valid start and destination locations.");
+    //     return;
+    // }
+
+    // const start = startPlace.geometry.location;
+    // const end = endPlace.geometry.location;
+
+    // // Directions request for walking
+    // const request = {
+    //     origin: start,
+    //     destination: end,
+    //     travelMode: google.maps.TravelMode.WALKING,
+    // };
+
+    // directionsService.route(request, (result, status) => {
+    //     if (status === google.maps.DirectionsStatus.OK) {
+    //         directionsRenderer.setDirections(result);
+    //         const walkingTime = result.routes[0].legs[0].duration.text;
+    //         alert(`Estimated Walking Time: ${walkingTime}`);
+    //     } else {
+    //         alert("Could not retrieve directions. Please check your inputs.");
+    //     }
+    // });
 
     // // Get accessible routes within range of start and end points
     // const accessibleRoutesInRange = getAccessibleRoutes(start, end, accessibleRoutes);
