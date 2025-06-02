@@ -184,6 +184,7 @@ function initMap() {
     map = new google.maps.Map(document.getElementById("map"), {
         zoom: 16,
         center: campusCenter,
+        mapId: e1ce080c366ce5ac67663c18
     });
 
     if (showBuildings) {
@@ -254,12 +255,12 @@ function initMap() {
 }
 
 function createMarker(item, map, type) {
-    let markerColor, iconURL, content;
+    let markerColor, iconURL, contentHTML;
 
     // Set the marker color and content based on the item type
     if (type === 'building') {
         markerColor = item.accessibleBuildingEntrance ? "green" : "red";
-        content = `
+        contentHTML = `
             <strong>${item.name}</strong><br>
             <ul>
                 <li><strong>Accessible Building Entrance:</strong> ${item.accessibleBuildingEntrance ? "Yes" : "No"}</li>
@@ -274,7 +275,7 @@ function createMarker(item, map, type) {
         //iconURL = https://maps.google.com/mapfiles/kml/paddle/red-stars-lv.png
 
     } else if (type === 'campus_entrance') {
-        content = `
+        contentHTML = `
             <strong>${item.name}</strong><br>
             <ul>
                 <li><strong>Accessible Campus Entrance:</strong> ${item.accessibleCampusEntrance ? "Yes" : "No"}</li>
@@ -284,7 +285,7 @@ function createMarker(item, map, type) {
 
     } else if (type === 'dining') {
         markerColor = item.accessibleBuildingEntrance ? "green" : "red";
-        content = `
+        contentHTML = `
             <strong>${item.name}</strong><br>
             <ul>
                 <li><strong>Accessible Building Entrance:</strong> ${item.accessibleBuildingEntrance ? "Yes" : "No"}</li>
@@ -300,22 +301,24 @@ function createMarker(item, map, type) {
 
     }
 
+    const iconElement = document.createElement('img');
+    iconElement.src = iconURL;
+    iconElement.style.width = '32px';
+    iconElement.style.height = '32px';
+    iconElement.style.transform = 'translate(-16px, -32px)';
+
     const marker = new google.maps.marker.AdvancedMarkerElement({
         position: { lat: item.lat, lng: item.lng },
         map: map,
         title: item.name,
-        icon: {
-            url: iconURL,
-            // you can adjust scaledSize if needed:
-            scaledSize: new google.maps.Size(32, 32)
-        }
+        content: iconElement
     });
     // Store marker in global array
     markers.push(marker);
 
     // Create and attach an info window to the marker
     const infoWindow = new google.maps.InfoWindow({
-        content: content
+        content: contentHTML
     });
 
     marker.addListener("click", () => {
