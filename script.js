@@ -320,7 +320,7 @@ function createMarker(item, map, type) {
     dot.style.width = "20px";
     dot.style.height = "20px";
     dot.style.borderRadius = "50%";
-    dot.style.backgroundColor = color;
+    dot.style.backgroundColor = markerColor;
     dot.style.transform = "translate(-10px, -20px)";
 
     const marker = new google.maps.marker.AdvancedMarkerElement({
