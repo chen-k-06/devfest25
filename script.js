@@ -303,33 +303,19 @@ function createMarker(item, map, type) {
 
     }
 
-    // const iconElement = document.createElement('img');
-    // iconElement.src = iconURL;
-    // iconElement.style.width = '32px';
-    // iconElement.style.height = '32px';
-    // iconElement.style.transform = 'translate(-16px, -32px)';
-
-    // const marker = new google.maps.marker.AdvancedMarkerElement({
-    //     position: { lat: item.lat, lng: item.lng },
-    //     map: map,
-    //     title: item.name,
-    //     content: iconElement
-    // });
-
-    const dot = document.createElement("div");
-    dot.style.width = "20px";
-    dot.style.height = "20px";
-    dot.style.borderRadius = "50%";
-    dot.style.backgroundColor = markerColor;
-    dot.style.transform = "translate(-10px, -20px)";
+    const iconElement = document.createElement('img');
+    iconElement.src = iconURL;
+    iconElement.style.width = '32px';
+    iconElement.style.height = '32px';
+    iconElement.style.transform = 'translate(-16px, -32px)';
 
     const marker = new google.maps.marker.AdvancedMarkerElement({
         position: { lat: item.lat, lng: item.lng },
         map: map,
         title: item.name,
-        content: dot
+        content: iconElement
     });
-    
+
     // Store marker in global array
     markers.push(marker);
 
