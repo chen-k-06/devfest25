@@ -232,7 +232,7 @@ function initMap() {
         }
         startLocation = place.geometry.location;
         if (endLocation) {
-            calculateRoute();
+            calculateRoute(startLocation, endLocation);
         }
     });
 
@@ -244,7 +244,7 @@ function initMap() {
         }
         endLocation = place.geometry.location;
         if (startLocation) {
-            calculateRoute();
+            calculateRoute(startLocation, endLocation);
         }
     });
   
@@ -427,7 +427,7 @@ function getAccessibleRoutes(startLocation, endLocation, accessibleRoutes) {
 }
 
 // Function to calculate the route
-function calculateRoute() {
+function calculateRoute(startLocation, endLocation) {
     if (!startLocation || !endLocation) {
         alert("Please select valid start and destination locations.");
         return;
