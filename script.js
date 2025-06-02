@@ -215,33 +215,36 @@ function initMap() {
     directionsRenderer.setMap(map);
 
     // Autocomplete for start and end locations
-    const startAutocomplete = document.getElementById("startAutocomplete");
-    const endAutocomplete = document.getElementById("endAutocomplete");
+    startAutocomplete = new google.maps.places.Autocomplete(document.getElementById("searchBarStart"));
+    startAutocomplete.setFields(["geometry", "name"]);
+
+    endAutocomplete = new google.maps.places.Autocomplete(document.getElementById("searchBarEnd"));
+    endAutocomplete.setFields(["geometry", "name"]);
 
     // Listen for place changes to trigger route calculation
     let startLocation = null;
     let endLocation   = null;
-    startAutocomplete.addEventListener("place_changed", () => {
+    startAutocomplete.addListener("place_changed", () => {
         const place = startAutocomplete.getPlace();
         if (!place.geometry || !place.geometry.location) {
-            alert("Please select a valid Start location.");
+            alert("Please select a place from the dropdown for Start.");
             return;
         }
         startLocation = place.geometry.location;
         if (endLocation) {
-            calculateRoute(startLocation, endLocation);
+            calculateRoute();
         }
     });
 
-    endAutocomplete.addEventListener("place_changed", () => {
+    endAutocomplete.addListener("place_changed", () => {
         const place = endAutocomplete.getPlace();
         if (!place.geometry || !place.geometry.location) {
-            alert("Please select a valid End location.");
+            alert("Please select a place from the dropdown for End.");
             return;
         }
         endLocation = place.geometry.location;
         if (startLocation) {
-            calculateRoute(startLocation, endLocation);
+            calculateRoute();
         }
     });
   
@@ -424,7 +427,7 @@ function getAccessibleRoutes(startLocation, endLocation, accessibleRoutes) {
 }
 
 // Function to calculate the route
-function calculateRoute(startLocation, endLocation) {
+function calculateRoute() {
     if (!startLocation || !endLocation) {
         alert("Please select valid start and destination locations.");
         return;

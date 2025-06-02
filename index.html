@@ -34,21 +34,10 @@
   <!-- Start and End Search Bar -->
    <div class = "searchBars">
         <h3 class="searchText">Where do you want to go?</h3>
-        <!-- Start Autocomplete -->
-        <gmp-autocomplete
-          id="startAutocomplete"
-          placeholder="Enter Start Location..."
-          fields="geometry,name"
-        >
-        </gmp-autocomplete>
+        <input id="searchBarStart" type="text" placeholder="Enter Start Location...">
+        <input id="searchBarEnd" type="text" placeholder="Enter End Location...">
+   </div>
 
-        <!-- End Autocomplete -->
-        <gmp-autocomplete
-          id="endAutocomplete"
-          placeholder="Enter End Location..."
-          fields="geometry,name"
-        >
-        </gmp-autocomplete>
 
     <!--checkboxes for options-->
     <div class="checkboxContainer">
