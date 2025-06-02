@@ -254,9 +254,7 @@ function initMap() {
 }
 
 function createMarker(item, map, type) {
-    let markerColor;
-    let iconURL;
-    let content;
+    let markerColor, iconURL, content;
 
     // Set the marker color and content based on the item type
     if (type === 'building') {
@@ -302,11 +300,15 @@ function createMarker(item, map, type) {
 
     }
 
-    const marker = new google.maps.Marker({
+    const marker = new google.maps.marker.AdvancedMarkerElement({
         position: { lat: item.lat, lng: item.lng },
         map: map,
         title: item.name,
-        icon: iconURL
+        icon: {
+            url: iconURL,
+            // you can adjust scaledSize if needed:
+            scaledSize: new google.maps.Size(32, 32)
+        }
     });
     // Store marker in global array
     markers.push(marker);
@@ -316,8 +318,12 @@ function createMarker(item, map, type) {
         content: content
     });
 
-    marker.addListener("click", function () {
-        infoWindow.open(map, marker);
+    marker.addListener("click", () => {
+        infoWindow.open({
+            anchor: marker,
+            map,
+            shouldFocus: false
+        });
     });
 
     // // Create the info window
