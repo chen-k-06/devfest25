@@ -307,7 +307,6 @@ function createMarker(item, map, type) {
     iconElement.src = iconURL;
     iconElement.style.width = '32px';
     iconElement.style.height = '32px';
-    iconElement.style.transform = 'translate(-16px, -32px)';
 
     const marker = new google.maps.marker.AdvancedMarkerElement({
         position: { lat: item.lat, lng: item.lng },
