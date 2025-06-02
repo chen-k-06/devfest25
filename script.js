@@ -184,7 +184,7 @@ function initMap() {
     map = new google.maps.Map(document.getElementById("map"), {
         zoom: 16,
         center: campusCenter,
-        mapId: e1ce080c366ce5ac67663c18
+        mapId: "e1ce080c366ce5ac67663c18"
     });
 
     if (showBuildings) {
