@@ -273,7 +273,7 @@ function createMarker(item, map, type) {
                 <li><strong>Wheelchair Lift:</strong> ${item.wheelchairLift ? "Yes" : "No"}</li>
             </ul>
         `;
-        iconURL = `http://maps.google.com/mapfiles/ms/icons/${markerColor}-dot.png`;
+        iconURL = `https://maps.google.com/mapfiles/ms/icons/${markerColor}-dot.png`;
         //iconURL = https://maps.google.com/mapfiles/kml/paddle/red-stars-lv.png
 
     } else if (type === 'campus_entrance') {
@@ -298,26 +298,41 @@ function createMarker(item, map, type) {
                 <li><strong>Wheelchair Lift:</strong> ${item.wheelchairLift ? "Yes" : "No"}</li>
             </ul>
         `;
-        iconURL = `http://maps.google.com/mapfiles/ms/icons/${markerColor}-dot.png`;
+        iconURL = `https://maps.google.com/mapfiles/ms/icons/${markerColor}-dot.png`;
         //iconURL = 'https://maps.google.com/mapfiles/kml/paddle/grn-circle-lv.png';
 
     }
 
-    const iconElement = document.createElement('img');
-    iconElement.src = iconURL;
-    iconElement.style.width = '32px';
-    iconElement.style.height = '32px';
-    iconElement.style.transform = 'translate(-16px, -32px)';
+    // const iconElement = document.createElement('img');
+    // iconElement.src = iconURL;
+    // iconElement.style.width = '32px';
+    // iconElement.style.height = '32px';
+    // iconElement.style.transform = 'translate(-16px, -32px)';
+
+    // const marker = new google.maps.marker.AdvancedMarkerElement({
+    //     position: { lat: item.lat, lng: item.lng },
+    //     map: map,
+    //     title: item.name,
+    //     content: iconElement
+    // });
+
+    const dot = document.createElement("div");
+    dot.style.width = "20px";
+    dot.style.height = "20px";
+    dot.style.borderRadius = "50%";
+    dot.style.backgroundColor = color;
+    dot.style.transform = "translate(-10px, -20px)";
 
     const marker = new google.maps.marker.AdvancedMarkerElement({
-        position: { lat: item.lat, lng: item.lng },
-        map: map,
-        title: item.name,
-        content: iconElement
+    position: { lat: item.lat, lng: item.lng },
+    map: map,
+    title: item.name,
+    content: dot
     });
+
     // Store marker in global array
     markers.push(marker);
-
+https://maps.google.com/mapfiles/ms/icons/green-dot.png
     // Create and attach an info window to the marker
     const infoWindow = new google.maps.InfoWindow({
         content: contentHTML
