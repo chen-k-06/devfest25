@@ -40,9 +40,9 @@ function updateCheckboxState() {
 document.getElementById("buildings").addEventListener("change", updateCheckboxState);
 document.getElementById("dining").addEventListener("change", updateCheckboxState);
 document.getElementById("entrances").addEventListener("change", updateCheckboxState);
-document.addEventListener("DOMContentLoaded", function () {
-    updateCheckboxState(); // Initialize the map based on the initial checkbox state
-});
+// document.addEventListener("DOMContentLoaded", function () {
+//     updateCheckboxState(); // Initialize the map based on the initial checkbox state
+// });
 
 function adjustContentPosition() {
     let header = document.getElementById('header');
@@ -249,6 +249,8 @@ function initMap() {
         }
       });
     });
+
+    updateCheckboxState();
 }
 
 function createMarker(item, map, type) {
