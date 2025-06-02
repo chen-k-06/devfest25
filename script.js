@@ -208,6 +208,7 @@ function initMap() {
 
         accessiblePolyline.setMap(map);
     });
+
     // Initialize Directions Service and Renderer
     directionsService = new google.maps.DirectionsService();
     directionsRenderer = new google.maps.DirectionsRenderer();
@@ -255,7 +256,8 @@ function initMap() {
 }
 
 function createMarker(item, map, type) {
-    let markerColor, iconURL, contentHTML;
+    let markerColor = "blue";
+    let iconURL, contentHTML;
 
     // Set the marker color and content based on the item type
     if (type === 'building') {
@@ -321,7 +323,7 @@ function createMarker(item, map, type) {
         content: contentHTML
     });
 
-    marker.addListener("click", () => {
+    marker.addListener("gmp-click", () => {
         infoWindow.open({
             anchor: marker,
             map,
